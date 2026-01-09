@@ -52,6 +52,7 @@ function extractLineNameFromFilename(filename: string): string {
   // Check if any key in the map is contained in the filename
   for (const [key, value] of Object.entries(FILENAME_TO_LINE_MAP)) {
     if (nameWithoutExt.includes(key) || key.includes(nameWithoutExt)) {
+      console.log(`[PDF Parser]   Matched "${nameWithoutExt}" to "${value}" via partial match with "${key}"`);
       return value;
     }
   }
@@ -60,11 +61,12 @@ function extractLineNameFromFilename(filename: string): string {
   const lineCode = nameWithoutExt.split('-')[0].toUpperCase();
   const mappedLine = LINE_NAME_MAP[lineCode];
   if (mappedLine) {
+    console.log(`[PDF Parser]   Matched "${nameWithoutExt}" to "${mappedLine}" via code "${lineCode}"`);
     return mappedLine;
   }
   
   // If all else fails, return a normalized version of the filename
-  console.warn(`[PDF Parser] Could not map filename "${filename}" to a line name. Using normalized filename.`);
+  console.warn(`[PDF Parser]   ⚠ Could not map filename "${filename}" to a line name. Using normalized filename.`);
   return nameWithoutExt
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -82,10 +84,11 @@ export async function parseTimetablePDF(
     throw new Error('parseTimetablePDF can only be used in Node.js environment. Use pre-processed JSON schedules in the browser.');
   }
 
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+  const filename = path.basename(pdfPath);
+
   try {
-    const fs = await import('node:fs/promises');
-    const path = await import('node:path');
-    
     const pdfExtraction = await import('pdf-extraction');
     const pdfBuffer = await fs.readFile(pdfPath);
     
@@ -94,13 +97,46 @@ export async function parseTimetablePDF(
     });
     
     const text = result.text || '';
+    const textLength = text.length;
+    
+    console.log(`[PDF Parser] Processing: ${filename}`);
+    console.log(`[PDF Parser]   Extracted ${textLength} characters from PDF`);
 
-    const filename = path.basename(pdfPath);
     const lineId = extractLineNameFromFilename(filename);
+    console.log(`[PDF Parser]   Mapped to line: ${lineId}`);
 
-    return parseTimetableText(text, lineId, serviceType);
+    if (textLength < 100) {
+      console.warn(`[PDF Parser]   ⚠ WARNING: Very little text extracted (${textLength} chars). PDF may be corrupted or image-based.`);
+    }
+
+    const trips = parseTimetableText(text, lineId, serviceType);
+    
+    if (trips.length === 0) {
+      console.warn(`[PDF Parser]   ⚠ WARNING: No trips extracted from ${filename} (line: ${lineId})`);
+      console.warn(`[PDF Parser]   This could indicate:`);
+      console.warn(`[PDF Parser]     - PDF format not recognized`);
+      console.warn(`[PDF Parser]     - No valid station/time data found`);
+      console.warn(`[PDF Parser]     - Station mapping issues`);
+    } else {
+      // Group trips by detected line (in case line detection changed them)
+      const tripsByLine: Record<string, number> = {};
+      trips.forEach(trip => {
+        tripsByLine[trip.line_id] = (tripsByLine[trip.line_id] || 0) + 1;
+      });
+      
+      console.log(`[PDF Parser]   ✓ Extracted ${trips.length} trips`);
+      if (Object.keys(tripsByLine).length > 1) {
+        console.log(`[PDF Parser]   Line breakdown: ${Object.entries(tripsByLine).map(([line, count]) => `${line} (${count})`).join(', ')}`);
+      }
+    }
+
+    return trips;
   } catch (error) {
-    console.error(`[PDF Parser] Error parsing ${pdfPath}:`, error);
+    console.error(`[PDF Parser]   ✗ ERROR parsing ${filename}:`, error);
+    if (error instanceof Error) {
+      console.error(`[PDF Parser]   Error message: ${error.message}`);
+      console.error(`[PDF Parser]   Stack: ${error.stack}`);
+    }
     return [];
   }
 }
@@ -581,7 +617,24 @@ function parseTimetableText(
     }
   }
 
-  console.log(`[PDF Parser] Extracted ${trips.length} trips from ${lineId} (${serviceType})`);
+  // Log detailed statistics
+  if (stationTimes.length === 0) {
+    console.warn(`[PDF Parser]   ⚠ No station rows found in text for ${lineId}`);
+  } else {
+    console.log(`[PDF Parser]   Found ${stationTimes.length} stations with time data`);
+    const totalTimes = stationTimes.reduce((sum, st) => sum + st.times.length, 0);
+    console.log(`[PDF Parser]   Total time entries: ${totalTimes}`);
+    console.log(`[PDF Parser]   Max times per station: ${Math.max(...stationTimes.map(st => st.times.length))}`);
+  }
+
+  console.log(`[PDF Parser]   Extracted ${trips.length} trips from ${lineId} (${serviceType})`);
+  
+  // Log trip direction breakdown
+  if (trips.length > 0) {
+    const inboundCount = trips.filter(t => t.direction === 'inbound').length;
+    const outboundCount = trips.filter(t => t.direction === 'outbound').length;
+    console.log(`[PDF Parser]   Direction breakdown: ${inboundCount} inbound, ${outboundCount} outbound`);
+  }
   
   return trips;
 }
@@ -605,13 +658,56 @@ export async function loadAllTimetables(
   const pdfFiles = files.filter((f: string) => f.endsWith('.pdf'));
 
   const allTrips: ScheduledTrip[] = [];
+  const processingStats: Array<{ filename: string; trips: number; lineId: string }> = [];
+
+  console.log(`[PDF Parser] Found ${pdfFiles.length} PDF files to process`);
+  console.log(`[PDF Parser] Files: ${pdfFiles.join(', ')}`);
+  console.log('');
 
   for (const pdfFile of pdfFiles) {
     const pdfPath = path.join(serviceDir, pdfFile);
     const trips = await parseTimetablePDF(pdfPath, serviceType);
+    
+    // Determine line ID from filename for stats
+    const lineId = extractLineNameFromFilename(pdfFile);
+    processingStats.push({
+      filename: pdfFile,
+      trips: trips.length,
+      lineId: lineId,
+    });
+    
     allTrips.push(...trips);
+    console.log(''); // Blank line between files
   }
 
-  console.log(`[PDF Parser] Loaded ${allTrips.length} total trips for ${serviceType}`);
+  // Summary statistics
+  console.log('='.repeat(80));
+  console.log(`[PDF Parser] PROCESSING SUMMARY for ${serviceType.toUpperCase()}`);
+  console.log('='.repeat(80));
+  
+  const tripsByLine: Record<string, number> = {};
+  allTrips.forEach(trip => {
+    tripsByLine[trip.line_id] = (tripsByLine[trip.line_id] || 0) + 1;
+  });
+  
+  console.log(`Total trips extracted: ${allTrips.length}`);
+  console.log('');
+  console.log('Trips by PDF file:');
+  processingStats.forEach(stat => {
+    const status = stat.trips > 0 ? '✓' : '✗';
+    console.log(`  ${status} ${stat.filename.padEnd(35)} → ${stat.trips.toString().padStart(4)} trips (line: ${stat.lineId})`);
+  });
+  
+  console.log('');
+  console.log('Trips by line (after line detection):');
+  Object.entries(tripsByLine)
+    .sort((a, b) => b[1] - a[1])
+    .forEach(([line, count]) => {
+      console.log(`  ${line.padEnd(30)} ${count.toString().padStart(4)} trips`);
+    });
+  
+  console.log('='.repeat(80));
+  console.log('');
+
   return allTrips;
 }
