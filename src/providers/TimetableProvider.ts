@@ -174,7 +174,6 @@ export class TimetableProvider extends BaseProvider {
       this.schedules = await loadSchedules();
       this.markAvailable();
       this.schedulesLoaded = true;
-      console.log(`[TimetableProvider] Loaded ${this.schedules.length} scheduled trips`);
     } catch (error) {
       console.warn('[TimetableProvider] Could not load schedules:', error);
       this.markUnavailable(error instanceof Error ? error : new Error(String(error)));
@@ -204,12 +203,8 @@ export class TimetableProvider extends BaseProvider {
       trip => trip.service_type === (isWeekend ? 'weekend' : 'weekday')
     );
 
-    console.log(`[TimetableProvider] Checking ${applicableTrips.length} ${isWeekend ? 'weekend' : 'weekday'} trips at ${Math.floor(currentTimeSeconds / 3600)}:${Math.floor((currentTimeSeconds % 3600) / 60)}`);
-
     // Find active trips
     const activeTrips = findActiveTrips(applicableTrips, currentTimeSeconds);
-    
-    console.log(`[TimetableProvider] Found ${activeTrips.length} active trips`);
 
     const trains: ProviderTrainData[] = [];
 
@@ -223,7 +218,6 @@ export class TimetableProvider extends BaseProvider {
       const positionData = calculateTripPosition(trip, segment);
       
       if (!positionData || !positionData.position) {
-        console.warn(`[TimetableProvider] Could not calculate position for train ${trip.train_id} on ${trip.line_id}`);
         continue; // Skip if we can't calculate position
       }
 

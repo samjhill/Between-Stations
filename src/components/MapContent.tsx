@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo, useMemo } from 'react';
 import TrainMarker from './TrainMarker';
 import TransitLines from './TransitLines';
 import StationsLayer from './StationsLayer';
@@ -17,7 +17,7 @@ interface MapContentProps {
   onFollowTrain: (trainId: string | null) => void;
 }
 
-export default function MapContent({
+function MapContent({
   trains,
   selectedTrain,
   followState,
@@ -32,10 +32,9 @@ export default function MapContent({
     idleThresholdMs: 75000, // 75 seconds
   });
 
-  // Debug logging
-  useEffect(() => {
-    const trainsWithPositions = trains.filter((t) => t.locationHypothesis?.position);
-    console.log(`MapContent: Rendering ${trainsWithPositions.length} trains with positions out of ${trains.length} total`);
+  // Memoize trains with positions to avoid filtering on every render
+  const trainsWithPositions = useMemo(() => {
+    return trains.filter((train) => train.locationHypothesis?.position);
   }, [trains]);
 
   return (
@@ -46,21 +45,19 @@ export default function MapContent({
       <StationsLayer />
       
       {/* Animated layer: trains */}
-      {trains
-        .filter((train) => train.locationHypothesis?.position)
-        .map((train) => {
-          const isSelected = selectedTrain?.id === train.id;
-          return (
-            <TrainMarker
-              key={`${train.id}-${train.locationHypothesis?.position?.lat}-${train.locationHypothesis?.position?.lng}`}
-              train={train}
-              isSelected={isSelected}
-              onTrainClick={onTrainClick}
-              onFollowTrain={onFollowTrain}
-              followState={followState}
-            />
-          );
-        })}
+      {trainsWithPositions.map((train) => {
+        const isSelected = selectedTrain?.id === train.id;
+        return (
+          <TrainMarker
+            key={train.id}
+            train={train}
+            isSelected={isSelected}
+            onTrainClick={onTrainClick}
+            onFollowTrain={onFollowTrain}
+            followState={followState}
+          />
+        );
+      })}
       
       {/* Camera controls and indicators */}
       <CameraControls
@@ -71,4 +68,6 @@ export default function MapContent({
     </>
   );
 }
+
+export default memo(MapContent);
 

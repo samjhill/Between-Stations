@@ -1,4 +1,5 @@
 import './Filters.css';
+import { memo, useMemo } from 'react';
 import { LINE_COLORS } from '../config/lineColors';
 import type { Train } from '../types/domain';
 import type { FilterState } from '../types/ui';
@@ -10,16 +11,18 @@ interface FiltersProps {
   onClose?: () => void;
 }
 
-export default function Filters({
+function Filters({
   trains,
   filterState,
   onFilterChange,
   onClose,
 }: FiltersProps) {
   // Get all lines from LINE_COLORS to ensure all NJ Transit lines are represented
-  const allLines = Object.keys(LINE_COLORS).sort();
-  // Get unique directions from trains
-  const directions = Array.from(new Set(trains.map((t) => t.direction))).sort();
+  const allLines = useMemo(() => Object.keys(LINE_COLORS).sort(), []);
+  // Get unique directions from trains - memoized
+  const directions = useMemo(() => {
+    return Array.from(new Set(trains.map((t) => t.direction))).sort();
+  }, [trains]);
 
   const handleLineToggle = (line: string) => {
     const newLines = filterState.lines.includes(line)
@@ -144,4 +147,6 @@ export default function Filters({
     </div>
   );
 }
+
+export default memo(Filters);
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { MapContainer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { ProviderManager } from '../core/Provider';
@@ -48,9 +48,7 @@ export default function MapView() {
   const fetchTrains = useCallback(async () => {
     try {
       const observations = await providerManager.fetchAllObservations();
-      console.log('Observations received:', observations.length, observations);
       const mergedTrains = mergeObservations(observations);
-      console.log('Merged trains:', mergedTrains.length, mergedTrains);
       setTrains(mergedTrains);
     } catch (error) {
       console.error('Error fetching trains:', error);
@@ -71,47 +69,49 @@ export default function MapView() {
     return () => clearInterval(interval);
   }, [fetchTrains, providerManager]);
 
-  // Filter trains
-  const filteredTrains = trains.filter((train) => {
-    if (filterState.lines.length > 0 && !filterState.lines.includes(train.line)) {
-      return false;
-    }
-    if (filterState.directions.length > 0 && !filterState.directions.includes(train.direction)) {
-      return false;
-    }
-    if (filterState.confidenceMin !== 'all') {
-      const confidenceOrder = { high: 3, medium: 2, low: 1, unknown: 0 };
-      const trainConfidence = train.locationHypothesis?.confidence || 'unknown';
-      const minConfidence = filterState.confidenceMin;
-      if (confidenceOrder[trainConfidence] < confidenceOrder[minConfidence]) {
+  // Filter trains - memoized to avoid recalculation on every render
+  const filteredTrains = useMemo(() => {
+    return trains.filter((train) => {
+      if (filterState.lines.length > 0 && !filterState.lines.includes(train.line)) {
         return false;
       }
-    }
-    if (filterState.searchQuery) {
-      const query = filterState.searchQuery.toLowerCase();
-      const matches =
-        train.trainNumber?.toLowerCase().includes(query) ||
-        train.line.toLowerCase().includes(query) ||
-        train.destination.toLowerCase().includes(query) ||
-        train.nextStop?.toLowerCase().includes(query);
-      if (!matches) return false;
-    }
-    return true;
-  });
+      if (filterState.directions.length > 0 && !filterState.directions.includes(train.direction)) {
+        return false;
+      }
+      if (filterState.confidenceMin !== 'all') {
+        const confidenceOrder = { high: 3, medium: 2, low: 1, unknown: 0 };
+        const trainConfidence = train.locationHypothesis?.confidence || 'unknown';
+        const minConfidence = filterState.confidenceMin;
+        if (confidenceOrder[trainConfidence] < confidenceOrder[minConfidence]) {
+          return false;
+        }
+      }
+      if (filterState.searchQuery) {
+        const query = filterState.searchQuery.toLowerCase();
+        const matches =
+          train.trainNumber?.toLowerCase().includes(query) ||
+          train.line.toLowerCase().includes(query) ||
+          train.destination.toLowerCase().includes(query) ||
+          train.nextStop?.toLowerCase().includes(query);
+        if (!matches) return false;
+      }
+      return true;
+    });
+  }, [trains, filterState.lines, filterState.directions, filterState.confidenceMin, filterState.searchQuery]);
 
   // Camera controller now handles follow mode - no need for this effect
 
-  const handleTrainClick = (train: Train) => {
+  const handleTrainClick = useCallback((train: Train) => {
     setSelectedTrain(train);
     // Don't open sidebar - tooltip will show instead
-  };
+  }, []);
 
-  const handleFollowTrain = (trainId: string | null) => {
+  const handleFollowTrain = useCallback((trainId: string | null) => {
     setFollowState({
       trainId,
       enabled: trainId !== null,
     });
-  };
+  }, []);
 
   return (
     <div className="app">

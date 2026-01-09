@@ -113,26 +113,36 @@ export default function TrainMarker({
   const confidence = train.locationHypothesis?.confidence || 'unknown';
   const markerRef = useRef<L.Marker | null>(null);
   const map = useMap();
-  const [mapView, setMapView] = useState({ center: map.getCenter(), zoom: map.getZoom() });
+  const mapViewRef = useRef({ center: map.getCenter(), zoom: map.getZoom() });
 
-  // Track map view changes (needed for pixel-based offsets)
+  // Track map view changes (needed for pixel-based offsets) - throttled
   useEffect(() => {
+    let rafId: number | null = null;
     const updateView = () => {
-      setMapView({ center: map.getCenter(), zoom: map.getZoom() });
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          mapViewRef.current = { center: map.getCenter(), zoom: map.getZoom() };
+          rafId = null;
+        });
+      }
     };
 
-    map.on('move', updateView);
-    map.on('zoom', updateView);
+    map.on('moveend', updateView);
+    map.on('zoomend', updateView);
     map.on('viewreset', updateView);
 
     return () => {
-      map.off('move', updateView);
-      map.off('zoom', updateView);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      map.off('moveend', updateView);
+      map.off('zoomend', updateView);
       map.off('viewreset', updateView);
     };
   }, [map]);
 
   // Snap train position to its line (accounting for corridor offsets)
+  // Only recalculate when position or line changes, not on every map move
   const snappedPosition = useMemo(() => {
     if (!rawPosition) return null;
     
@@ -142,7 +152,7 @@ export default function TrainMarker({
       console.warn(`Failed to snap train ${train.id} to line ${train.line}:`, error);
       return rawPosition; // Fallback to raw position
     }
-  }, [rawPosition, train.line, train.id, map, mapView.center.lat, mapView.center.lng, mapView.zoom]);
+  }, [rawPosition?.lat, rawPosition?.lng, train.line, train.id, map]);
 
   // Calculate direction angle for the train
   const directionAngle = useMemo(() => {
@@ -154,7 +164,7 @@ export default function TrainMarker({
       console.warn(`Failed to calculate direction angle for train ${train.id}:`, error);
       return null;
     }
-  }, [snappedPosition, train.line, train.direction, train.id, map, mapView.center.lat, mapView.center.lng, mapView.zoom]);
+  }, [snappedPosition?.lat, snappedPosition?.lng, train.line, train.direction, train.id, map]);
 
   // Track if popup should stay open
   const popupShouldStayOpen = useRef(false);
@@ -185,7 +195,10 @@ export default function TrainMarker({
     return null;
   }
 
-  const icon = createTrainIcon(train, isSelected, directionAngle);
+  // Memoize icon creation to avoid recreating on every render
+  const icon = useMemo(() => {
+    return createTrainIcon(train, isSelected, directionAngle);
+  }, [train.line, train.locationHypothesis?.confidence, isSelected, directionAngle]);
 
   return (
     <Marker

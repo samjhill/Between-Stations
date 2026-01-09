@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { memo } from 'react';
 import MapView from './components/MapView';
 import About from './components/About';
 import './App.css';
 
-function AppFooter() {
+const AppFooter = memo(function AppFooter() {
   return (
     <footer className="app-footer">
       <Link to="/about" className="app-footer-link">
@@ -11,7 +12,7 @@ function AppFooter() {
       </Link>
     </footer>
   );
-}
+});
 
 function AppContent() {
   const location = useLocation();

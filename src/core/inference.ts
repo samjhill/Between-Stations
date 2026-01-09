@@ -261,14 +261,10 @@ export function createLocationHypothesis(
 export function mergeObservations(
   observations: ProviderObservation[]
 ): Train[] {
-  console.log('mergeObservations: Received observations:', observations.length);
-  
   // Group observations by train ID
   const trainMap = new Map<string, Evidence[]>();
 
   for (const observation of observations) {
-    console.log(`mergeObservations: Processing observation from ${observation.provider} with ${observation.trains.length} trains`);
-    
     for (const trainData of observation.trains) {
       const trainId =
         trainData.trainNumber || `${trainData.line}-${trainData.direction}`;
@@ -276,8 +272,6 @@ export function mergeObservations(
       if (!trainMap.has(trainId)) {
         trainMap.set(trainId, []);
       }
-
-      console.log(`mergeObservations: Train ${trainId} has position:`, trainData.position);
 
       // Determine evidence type
       let evidenceType: Evidence['type'] = 'prediction';
@@ -310,27 +304,24 @@ export function mergeObservations(
     }
   }
 
-  console.log('mergeObservations: Grouped into', trainMap.size, 'unique trains');
-
   // Create trains from merged evidence
   const trains: Train[] = [];
+  const currentTime = Date.now();
 
   for (const [trainId, evidence] of trainMap.entries()) {
-    console.log(`mergeObservations: Creating hypothesis for train ${trainId} with ${evidence.length} evidence items`);
     const locationHypothesis = createLocationHypothesis(trainId, evidence);
     
     if (!locationHypothesis) {
-      console.warn(`mergeObservations: No location hypothesis for train ${trainId}`);
       continue; // Skip trains without position
     }
 
-    console.log(`mergeObservations: Train ${trainId} has hypothesis with position:`, locationHypothesis.position);
-
-    const mostRecentEvidence = evidence[0];
+    // Sort evidence by timestamp (most recent first) for mostRecentEvidence
+    const sortedEvidence = [...evidence].sort((a, b) => b.timestamp - a.timestamp);
+    const mostRecentEvidence = sortedEvidence[0];
     const data = mostRecentEvidence.data;
 
     const status = inferTrainStatus(evidence);
-    const state = inferTrainState(evidence, Date.now());
+    const state = inferTrainState(evidence, currentTime);
 
     trains.push({
       id: trainId,
@@ -342,12 +333,11 @@ export function mergeObservations(
       delaySeconds: data.delaySeconds as number | undefined,
       nextStop: data.nextStop as string | undefined,
       locationHypothesis,
-      lastUpdateTime: Date.now(),
+      lastUpdateTime: currentTime,
       state,
     });
   }
 
-  console.log('mergeObservations: Returning', trains.length, 'trains');
   return trains;
 }
 

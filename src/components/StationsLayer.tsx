@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, memo } from 'react';
 import { CircleMarker, Tooltip, useMap } from 'react-leaflet';
 import { MAJOR_STATIONS } from '../config/lineColors';
 import { STATION_DATABASE } from '../core/stationMapping';
@@ -15,7 +15,7 @@ interface Station {
  * - Minor stations: small white circles with dark outline
  * - Major stations: larger circles or rings with dark outline
  */
-export default function StationsLayer() {
+function StationsLayer() {
   const map = useMap();
   const [zoom, setZoom] = useState(10);
 
@@ -143,4 +143,6 @@ export default function StationsLayer() {
     </>
   );
 }
+
+export default memo(StationsLayer);
 

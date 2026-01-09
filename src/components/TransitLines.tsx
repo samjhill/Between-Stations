@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, memo } from 'react';
 import { useMap } from 'react-leaflet';
 import { Polyline } from 'react-leaflet';
 import { getLineColor, LINE_COLORS } from '../config/lineColors';
@@ -13,7 +13,7 @@ interface TransitLinesProps {
  * TransitLines component - renders one smooth line per train route from start to end
  * Uses official NJ Transit route sequences
  */
-export default function TransitLines({ filterState }: TransitLinesProps) {
+function TransitLines({ filterState }: TransitLinesProps) {
   // Get all lines from LINE_COLORS
   const allLines = Object.keys(LINE_COLORS);
   
@@ -58,3 +58,5 @@ export default function TransitLines({ filterState }: TransitLinesProps) {
     </>
   );
 }
+
+export default memo(TransitLines);

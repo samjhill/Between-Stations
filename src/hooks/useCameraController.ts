@@ -123,11 +123,20 @@ export function useCameraController({
     };
   }, [map, recordUserInteraction]);
 
-  // Main camera update loop
+  // Main camera update loop - throttled to reduce CPU usage
   useEffect(() => {
     let lastTime = performance.now();
+    let lastUpdateTime = 0;
+    const UPDATE_INTERVAL = 100; // Update every 100ms instead of every frame
 
     const updateCamera = (currentTime: number) => {
+      // Throttle updates to reduce CPU usage
+      if (currentTime - lastUpdateTime < UPDATE_INTERVAL) {
+        animationFrameRef.current = requestAnimationFrame(updateCamera);
+        return;
+      }
+      lastUpdateTime = currentTime;
+
       const deltaTime = currentTime - lastTime;
       lastTime = currentTime;
 
@@ -137,7 +146,8 @@ export function useCameraController({
       // Check if ambient mode should activate
       if (state.mode === 'manual' && controller.shouldActivateAmbient(idleThresholdMs)) {
         controller.setMode('ambient');
-        setCameraState(controller.getState());
+        const newState = controller.getState();
+        setCameraState(newState);
         if (onModeChange) {
           onModeChange('ambient');
         }
@@ -175,15 +185,13 @@ export function useCameraController({
         }
       }
 
-      // Update state
+      // Update state only if it changed
       const newState = controller.getState();
       if (newState.mode !== cameraState.mode) {
         setCameraState(newState);
         if (onModeChange) {
           onModeChange(newState.mode);
         }
-      } else {
-        setCameraState(newState);
       }
 
       animationFrameRef.current = requestAnimationFrame(updateCamera);

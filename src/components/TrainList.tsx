@@ -1,4 +1,5 @@
 import './TrainList.css';
+import { memo, useMemo } from 'react';
 import type { Train } from '../types/domain';
 import type { FollowState } from '../types/ui';
 
@@ -10,7 +11,7 @@ interface TrainListProps {
   onFollowTrain: (trainId: string | null) => void;
 }
 
-function getConfidenceBadgeClass(confidence: string): string {
+const getConfidenceBadgeClass = (confidence: string): string => {
   switch (confidence) {
     case 'high':
       return 'confidence-high';
@@ -21,18 +22,18 @@ function getConfidenceBadgeClass(confidence: string): string {
     default:
       return 'confidence-unknown';
   }
-}
+};
 
-function formatDelay(delaySeconds: number): string {
+const formatDelay = (delaySeconds: number): string => {
   if (delaySeconds < 60) {
     return `${delaySeconds}s`;
   }
   const minutes = Math.floor(delaySeconds / 60);
   const seconds = delaySeconds % 60;
   return seconds > 0 ? `${minutes}m ${seconds}s` : `${minutes}m`;
-}
+};
 
-function formatTime(timestamp: number): string {
+const formatTime = (timestamp: number): string => {
   const date = new Date(timestamp);
   const now = Date.now();
   const diffMs = now - timestamp;
@@ -46,9 +47,9 @@ function formatTime(timestamp: number): string {
     return `${minutes}m ago`;
   }
   return date.toLocaleTimeString();
-}
+};
 
-export default function TrainList({
+function TrainList({
   trains,
   selectedTrain,
   followState,
@@ -130,4 +131,6 @@ export default function TrainList({
     </div>
   );
 }
+
+export default memo(TrainList);
 
