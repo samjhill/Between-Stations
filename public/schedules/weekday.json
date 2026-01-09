@@ -1,0 +1,6425 @@
+[
+  {
+    "train_id": "4616",
+    "line_id": "Atlantic City",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "PNS",
+        "station_name": "Pennsauken",
+        "arrival_time": 46020
+      },
+      {
+        "stop_id": "HAM",
+        "station_name": "Hammonton",
+        "arrival_time": 43620
+      },
+      {
+        "stop_id": "EHC",
+        "station_name": "Egg Harbor City",
+        "arrival_time": 44220
+      },
+      {
+        "stop_id": "ABS",
+        "station_name": "Absecon",
+        "arrival_time": 44880
+      },
+      {
+        "stop_id": "ATC",
+        "station_name": "Atlantic City",
+        "arrival_time": 45660
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "4624",
+    "line_id": "Atlantic City",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "ABS",
+        "station_name": "Absecon",
+        "arrival_time": 44100
+      },
+      {
+        "stop_id": "EHC",
+        "station_name": "Egg Harbor City",
+        "arrival_time": 44880
+      },
+      {
+        "stop_id": "HAM",
+        "station_name": "Hammonton",
+        "arrival_time": 45540
+      },
+      {
+        "stop_id": "ATCO",
+        "station_name": "Atco",
+        "arrival_time": 46320
+      },
+      {
+        "stop_id": "LIN",
+        "station_name": "Lindenwold",
+        "arrival_time": 46740
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "4638",
+    "line_id": "Atlantic City",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "EHC",
+        "station_name": "Egg Harbor City",
+        "arrival_time": 43740
+      },
+      {
+        "stop_id": "ABS",
+        "station_name": "Absecon",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "ATC",
+        "station_name": "Atlantic City",
+        "arrival_time": 45120
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6200",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "BON",
+        "station_name": "Boonton",
+        "arrival_time": 21000
+      },
+      {
+        "stop_id": "MST",
+        "station_name": "Montclair State University",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 18540
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 20820
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 21060
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 45060
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6202",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "BON",
+        "station_name": "Boonton",
+        "arrival_time": 25740
+      },
+      {
+        "stop_id": "MST",
+        "station_name": "Montclair State University",
+        "arrival_time": 27420
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 20520
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 22260
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 23460
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6204",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 22860
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 29820
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 34680
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 45960
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "1070",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 30840
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 38640
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6206",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 24840
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 31020
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 41700
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "1000",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 25980
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 32520
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "1006",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 31020
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 43260
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6216",
+    "line_id": "Main/Bergen",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 31440
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 45780
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 43680
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 46380
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6200",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 16020
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 16020
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 16860
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 18540
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 21180
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 19380
+      },
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 25380
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 23580
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 24540
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 27660
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 28800
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 28020
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6602",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 17280
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 20340
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 21240
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 18780
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 20820
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 23460
+      },
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 27480
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 26340
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 27240
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 27840
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 30840
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 34680
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 46380
+      },
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 46320
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6202",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 20940
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 22200
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 20100
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 25200
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 25620
+      },
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 28320
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 28260
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 29160
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 29880
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 31020
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 46560
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 43920
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 45480
+      },
+      {
+        "stop_id": "BER",
+        "station_name": "Bernardsville",
+        "arrival_time": 43560
+      },
+      {
+        "stop_id": "GLD",
+        "station_name": "Gladstone",
+        "arrival_time": 44520
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6604",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "MOT",
+        "station_name": "Morristown",
+        "arrival_time": 21660
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 19860
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 25560
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 30060
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 31440
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 45060
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6204",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 20520
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 25440
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 30480
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 32520
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 45480
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6606",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 21960
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 25800
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 31020
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "1070",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 22620
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 27900
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 31440
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6610",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 22860
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 27420
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 31860
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6406",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 23820
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 27780
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "6206",
+    "line_id": "Morris & Essex",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 28200
+      },
+      {
+        "stop_id": "NB",
+        "station_name": "Newark Broad St",
+        "arrival_time": 43500
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3806",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 13620
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 14340
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 18000
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 17400
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 17760
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 18180
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 27180
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 28020
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 28500
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 30240
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 30240
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 30840
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 43800
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 44160
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 44580
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 45480
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 45000
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 45840
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3808",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 15420
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 16200
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 19380
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 18720
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 19140
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 19620
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 26580
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 27360
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 29940
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 31320
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 30300
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 31080
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 43500
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 45240
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 45600
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 46020
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 46320
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3204",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 18360
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 19200
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 20760
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 20220
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 20640
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 29160
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 30000
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 31200
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 31980
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 30660
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 31380
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 44460
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 45240
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 46080
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 46500
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3700",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 17460
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 18240
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 20460
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 20820
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 21240
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 27960
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 28800
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 32520
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 32220
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 30900
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 32100
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 46200
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 43260
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3910",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 19920
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 20700
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 20760
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 21240
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 21600
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 30360
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 31260
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 34260
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 33060
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 31680
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 32580
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 44700
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3810",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 21900
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 25980
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 22080
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 21120
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 21960
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 32040
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 32880
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 28440
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 33360
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 32160
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 32760
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 45060
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 45420
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3208",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 20700
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 21480
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 27480
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 23340
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 21480
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 22980
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 33660
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 34500
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 28920
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 35100
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 32340
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 33060
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 46380
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 46740
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3702",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 22980
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 23820
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 101580
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 111000
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 108900
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 110340
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 121200
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 121980
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 116100
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 121920
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 118980
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 120240
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3812",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 23820
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 24660
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 103440
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 112860
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 109920
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 111000
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 121680
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 122460
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 116820
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 123120
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 119820
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 120360
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 130020
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3704",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 22260
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 23100
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 18300
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 27840
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 23760
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 25140
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 37140
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 37920
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 32100
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 37680
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 33540
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 34140
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 44940
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 45960
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3210",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 24780
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 25620
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 19080
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 28860
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 24180
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 25440
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 36780
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 37560
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 31560
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 38100
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 33720
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 35160
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 43320
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 44100
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 43800
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3914",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 25860
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 26760
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 17760
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 24720
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 26340
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 38940
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 39720
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 32880
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 38400
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 34740
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 36000
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 45720
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 46500
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 44940
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3706",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 13980
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 18000
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 21600
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 19140
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 25080
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 27000
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 38460
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 39240
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 33720
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 38820
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 35580
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 36300
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3814",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 15780
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 19380
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 21060
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 20220
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 24960
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 27180
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 27540
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 28500
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 35340
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 39960
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 35880
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 37500
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 44040
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 45000
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 45300
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3918",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 18780
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 20760
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 22980
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 20820
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 25920
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 27360
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 26940
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 29940
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 34560
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 40680
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 36840
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 38460
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 46320
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 46740
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 44880
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3708",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 17820
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 22380
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 21240
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 26520
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 27660
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 29580
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 31200
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 36420
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 42480
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 37080
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 38880
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 45480
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3920",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 20280
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 24420
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 21120
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 26760
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 28260
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 28380
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 32520
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 36900
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 30240
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 38040
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 39240
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 44820
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 43500
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3818",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 22260
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 25980
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 24000
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 21480
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 26880
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 28680
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 30780
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 34260
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 38820
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 116700
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 124860
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 126060
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 132960
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 129960
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 131340
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 130740
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3124",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 21060
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 27480
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 25200
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 27240
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 28920
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 32460
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 28440
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 38400
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 117060
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 125220
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 127200
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 131340
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 132300
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 130260
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 132120
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 130920
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3922",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 23400
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 101580
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 112800
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 109920
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 114180
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 115800
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 120420
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 115320
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 126960
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 117300
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 125580
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 127860
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 133020
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 131700
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 133080
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 131520
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3502",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 24240
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 17040
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 27060
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 23760
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 28260
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 29820
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 35160
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 29700
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 40140
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 118080
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 126720
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 129720
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 132660
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 131640
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3710",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 22620
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 18300
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 27960
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 24180
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 28500
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 30480
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 35640
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 30420
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 28740
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 32160
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 40680
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 117840
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3924",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 25200
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 19080
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 15420
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 24720
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 28920
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 105480
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 123960
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 118500
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 115620
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 118740
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 127440
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 118140
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 130080
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 129600
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3126",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 26280
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 17280
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 25080
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 29340
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 106800
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 123540
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 117960
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 116400
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 118980
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 129000
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 118260
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 132480
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 131880
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3712",
+    "line_id": "Northeast Corridor",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 17580
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 21600
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 18540
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 24960
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 30000
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 107880
+      },
+      {
+        "stop_id": "TRE",
+        "station_name": "Trenton",
+        "arrival_time": 125700
+      },
+      {
+        "stop_id": "PJ",
+        "station_name": "Princeton Junction",
+        "arrival_time": 119280
+      },
+      {
+        "stop_id": "JAV",
+        "station_name": "Jersey Avenue",
+        "arrival_time": 117120
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 119820
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 129300
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 118620
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 130560
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 131760
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 131280
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3202",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 17040
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 17280
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 17580
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 17820
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 18060
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 18240
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 18420
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 18660
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 18900
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 14160
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 14520
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 14760
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 15120
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 15420
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 15660
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 16260
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 16620
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 16980
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 18840
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 17940
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 18300
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 22260
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 18720
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 45840
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 43800
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 44160
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 44580
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3204",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 19020
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 19260
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 19560
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 20040
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 20280
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 20520
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 20760
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 21000
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 15780
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 16140
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 16380
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 16740
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 17040
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 17280
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 17880
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 18240
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 18600
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 20160
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 20220
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 23280
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 20640
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 43380
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 43740
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 44100
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 44880
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 45300
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 45600
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3208",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 21060
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 21300
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 21600
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 21840
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 22080
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 22320
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 22560
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 22800
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 23040
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 17040
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 17400
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 17700
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 18060
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 18420
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 18660
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 19200
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 19620
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 19980
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 27840
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 21480
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 25680
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 21960
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 46320
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 46740
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3210",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 22080
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 22320
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 22620
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 22860
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 23100
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 23340
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 23520
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 23760
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 19500
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 19920
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 20160
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 20520
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 20880
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 21120
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 21720
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 22140
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 25200
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 31320
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 24180
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 27120
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 24600
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 43260
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3312",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 23040
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 23280
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 23580
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 23820
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 24240
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 24420
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 24660
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 24900
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 21360
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 21720
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 21960
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 22380
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 22980
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 23580
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 24660
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 24180
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 26100
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 33060
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 111780
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 114300
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 112200
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 130200
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 131160
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 131400
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 131640
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 131880
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 132060
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 132300
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 132540
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 132780
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 133140
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3218",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 24540
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 24780
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 25080
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 25320
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 25560
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 25860
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 26040
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 26280
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 26520
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 22140
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 23100
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 23460
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 23700
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 24240
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 25560
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 25020
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 28440
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 35520
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 112680
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 116160
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 113160
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3502",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 27840
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 28080
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 28380
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 28620
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 28860
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 29040
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 29220
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 29460
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 29700
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 23340
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 23700
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 24000
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 24420
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 24780
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 25020
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 25200
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 27060
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 25920
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 29700
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 37680
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 114660
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 116760
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 115080
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3320",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 30300
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 30540
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 30840
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 31080
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 31320
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 31560
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 31800
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 32040
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 32280
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 110760
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 111120
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 111360
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 111780
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 112140
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 112440
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 112020
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 113460
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 112740
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 117960
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 124800
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 113880
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 116760
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 115560
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 130980
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 129660
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 130020
+      },
+      {
+        "stop_id": "LS",
+        "station_name": "Little Silver",
+        "arrival_time": 130260
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 130980
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 130080
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 130320
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 130560
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 130800
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 130980
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 131220
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 131460
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 131700
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 132000
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3222",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 17280
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 17580
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 17820
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 18060
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 18240
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 18420
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 18660
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 18900
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 19320
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 24360
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 33420
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 111360
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 111780
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 112140
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 112440
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 113040
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 114240
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 113820
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 119820
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 126360
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 115080
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 117900
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 115560
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 131640
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 131880
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 132240
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 132600
+      },
+      {
+        "stop_id": "LS",
+        "station_name": "Little Silver",
+        "arrival_time": 132840
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 133020
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "8320",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 19260
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 19560
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 20040
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 20280
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 20520
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 20760
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 21000
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 25320
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 25620
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 34500
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 112620
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 113040
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 113400
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 113640
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 113040
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 114660
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 113820
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 120420
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 104700
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 115080
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 119700
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 116700
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 129720
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 130740
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 129900
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3504",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 21300
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 21600
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 21840
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 22080
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 22320
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 22560
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 22800
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 23040
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 30060
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 26880
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 35940
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 113940
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 114300
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 114660
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 114960
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 113880
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 115560
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 114600
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 122580
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 106620
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 116640
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 119100
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 118500
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 132660
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 131820
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 130380
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 131160
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 131280
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 132540
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 132840
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3224",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 22320
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 22620
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 22860
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 23100
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 23340
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 23520
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 23760
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 32700
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 28500
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 101160
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 115500
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 115860
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 116220
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 116460
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 114240
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 115920
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 115020
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 105600
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 107880
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 116280
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 121380
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 118020
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 131460
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 132900
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3506",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 23280
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 23580
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 23820
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 24240
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 24420
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 24660
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 24900
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 100560
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 116760
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 102780
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 117360
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 117720
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 118080
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 118320
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 115140
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 117420
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 115920
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 107040
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 110580
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 118080
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 122400
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 120240
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 129660
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 130200
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 130200
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3326",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 24780
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 25080
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 25320
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 25560
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 25860
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 26040
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 26280
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 26520
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 102180
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 119400
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 104100
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 120060
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 120420
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 120780
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 121020
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 115560
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 119280
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 116280
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 109560
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 111780
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 117540
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 109200
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 121320
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 129600
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 131400
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 131640
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 131880
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 132060
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 132300
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 132540
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 132780
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 133140
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 133080
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 131040
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 131280
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 131580
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 131940
+      },
+      {
+        "stop_id": "LS",
+        "station_name": "Little Silver",
+        "arrival_time": 132180
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3228",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 28080
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 28380
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 28620
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 28860
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 29040
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 29220
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 29460
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 29700
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 103440
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 120480
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 106560
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 121140
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 121500
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 121860
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 122100
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 117060
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 119880
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 117780
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 112980
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 112680
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 119820
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 110400
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 122700
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 130440
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 130800
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 131100
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 131400
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 131760
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 132000
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 130800
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 130440
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3230",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 30540
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 30840
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 31080
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 31320
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 31560
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 31800
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 32040
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 32280
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 105900
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 121920
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 108360
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 122580
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 122940
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 123300
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 123540
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 118920
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 122040
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 119640
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 115260
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 114660
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 120900
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 112800
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 124860
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3508",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 17580
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 17820
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 18060
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 18240
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 18420
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 18660
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 18900
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 19320
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 21360
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 101520
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 101820
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 102060
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 102660
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 119520
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 123060
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 120240
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 116520
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 113880
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 122280
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 114000
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 125640
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 130140
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 130140
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 130500
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 130740
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 131280
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 132300
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 131160
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 129840
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 130560
+      },
+      {
+        "stop_id": "LB",
+        "station_name": "Long Branch",
+        "arrival_time": 130320
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 130560
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 130800
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 130980
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 131220
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 131460
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 131700
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 132000
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 132600
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3234",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 19560
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 19800
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 20040
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 20280
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 20520
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 20760
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 21000
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 25320
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 22140
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 24000
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 103140
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 103440
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 103680
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 104280
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 121620
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 124560
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 122340
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 118380
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 115080
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 124440
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 115200
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 127200
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 130920
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 132720
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 130080
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "8234",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 21600
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 21840
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 22080
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 22320
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 22560
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 22800
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 23040
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 30060
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 23340
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 24960
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 18060
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 18420
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 18660
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 19200
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 36300
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 103380
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 123420
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 120840
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 115080
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 125220
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 117000
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 105900
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 130020
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 130440
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 130740
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 130560
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 132660
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 133080
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 133020
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "3236",
+    "line_id": "North Jersey Coast",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "BH",
+        "station_name": "Bay Head",
+        "arrival_time": 22620
+      },
+      {
+        "stop_id": "PPB",
+        "station_name": "Point Pleasant Beach",
+        "arrival_time": 22860
+      },
+      {
+        "stop_id": "MSQ",
+        "station_name": "Manasquan",
+        "arrival_time": 23100
+      },
+      {
+        "stop_id": "SL",
+        "station_name": "Spring Lake",
+        "arrival_time": 23340
+      },
+      {
+        "stop_id": "BEL",
+        "station_name": "Belmar",
+        "arrival_time": 23520
+      },
+      {
+        "stop_id": "BB",
+        "station_name": "Bradley Beach",
+        "arrival_time": 23760
+      },
+      {
+        "stop_id": "AP",
+        "station_name": "Asbury Park",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 32700
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 110760
+      },
+      {
+        "stop_id": "MP",
+        "station_name": "Monmouth Park",
+        "arrival_time": 111360
+      },
+      {
+        "stop_id": "RB",
+        "station_name": "Red Bank",
+        "arrival_time": 106920
+      },
+      {
+        "stop_id": "MID",
+        "station_name": "Middletown",
+        "arrival_time": 107280
+      },
+      {
+        "stop_id": "HAZ",
+        "station_name": "Hazlet",
+        "arrival_time": 107520
+      },
+      {
+        "stop_id": "ABM",
+        "station_name": "Aberdeen-Matawan",
+        "arrival_time": 108120
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 124140
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 105000
+      },
+      {
+        "stop_id": "WB",
+        "station_name": "Woodbridge",
+        "arrival_time": 124920
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 123000
+      },
+      {
+        "stop_id": "EWR",
+        "station_name": "Newark Airport",
+        "arrival_time": 116640
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 126720
+      },
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 117600
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 107880
+      },
+      {
+        "stop_id": "ALL",
+        "station_name": "Allenhurst",
+        "arrival_time": 129720
+      },
+      {
+        "stop_id": "ELB",
+        "station_name": "Elberon",
+        "arrival_time": 130140
+      },
+      {
+        "stop_id": "SA",
+        "station_name": "South Amboy",
+        "arrival_time": 132600
+      },
+      {
+        "stop_id": "PA",
+        "station_name": "Perth Amboy",
+        "arrival_time": 133020
+      },
+      {
+        "stop_id": "AV",
+        "station_name": "Avenel",
+        "arrival_time": 130380
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "1610",
+    "line_id": "Pascack Valley",
+    "direction": "inbound",
+    "stops": [
+      {
+        "stop_id": "HOB",
+        "station_name": "Hoboken",
+        "arrival_time": 44940
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 45600
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5404",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 21060
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 17460
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 18120
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 18840
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 19740
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 20640
+      },
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 44340
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 43740
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 44400
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 45120
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 46020
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 46560
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "2406",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 22260
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 19740
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 20400
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 21120
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 22080
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 22980
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5408",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 24060
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 22200
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 22860
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 23580
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 24540
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 25440
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5710",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 33660
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 110820
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 110820
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 112020
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 112200
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 113160
+      },
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 130980
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5412",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 21300
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 25800
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 25740
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 26940
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 26640
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 27660
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5714",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 22500
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 27660
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 27540
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 28980
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 27120
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 28260
+      },
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 45420
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5416",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 24300
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 28860
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 28380
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 30360
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 28020
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 28920
+      },
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 44820
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 43200
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 43920
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 44580
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 45240
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5718",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 33900
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 30780
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 29640
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 32040
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 28980
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 29820
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5420",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 21540
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 32700
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 31440
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 34140
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 30060
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 31080
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5422",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 22740
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 36780
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 33360
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 38160
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 31320
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 32100
+      },
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 45180
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 45660
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5902",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 24540
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 40140
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 37440
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 41520
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 119340
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 120240
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5126",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 34140
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 104040
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 127200
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 105480
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 121560
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 122040
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 131340
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 132720
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5170",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 21900
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 19920
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 18300
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 21360
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 39000
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 39480
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 43680
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 44400
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 45480
+      }
+    ],
+    "service_type": "weekday"
+  },
+  {
+    "train_id": "5132",
+    "line_id": "Raritan Valley",
+    "direction": "outbound",
+    "stops": [
+      {
+        "stop_id": "HB",
+        "station_name": "High Bridge",
+        "arrival_time": 23100
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 22380
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 20580
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 23820
+      },
+      {
+        "stop_id": "NWK",
+        "station_name": "Newark Penn Station",
+        "arrival_time": 42420
+      },
+      {
+        "stop_id": "SEC",
+        "station_name": "Secaucus Junction",
+        "arrival_time": 42960
+      },
+      {
+        "stop_id": "PLF",
+        "station_name": "Plainfield",
+        "arrival_time": 43920
+      },
+      {
+        "stop_id": "WFD",
+        "station_name": "Westfield",
+        "arrival_time": 44580
+      },
+      {
+        "stop_id": "RSP",
+        "station_name": "Roselle Park",
+        "arrival_time": 45360
+      }
+    ],
+    "service_type": "weekday"
+  }
+]
