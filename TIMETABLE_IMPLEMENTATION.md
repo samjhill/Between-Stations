@@ -65,14 +65,14 @@ npm run dev
 
 ### 3. Provider Configuration
 
-The timetable provider is registered in `App.tsx`:
+The timetable provider is registered in `MapView.tsx`:
 
 ```typescript
 const timetableProvider = new TimetableProvider();
 manager.register(timetableProvider);
 ```
 
-To disable the mock provider and use only timetable data, comment out the mock provider registration.
+The application uses only real train schedules from PDF extraction - no mock data is used.
 
 ## Features
 
@@ -215,4 +215,5 @@ Those belong to higher-fidelity providers (future implementations).
 - Ensure PDFs are text-extractable (not scanned images)
 - Check PDF structure - parser expects train numbers and times in consistent format
 - Consider manual JSON creation for complex schedules
+
 

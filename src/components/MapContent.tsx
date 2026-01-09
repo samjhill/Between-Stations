@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
-import { useMap } from 'react-leaflet';
 import TrainMarker from './TrainMarker';
 import TransitLines from './TransitLines';
 import StationsLayer from './StationsLayer';
+import StateBoundaries from './StateBoundaries';
+import CameraControls from './CameraControls';
+import { useCameraController } from '../hooks/useCameraController';
 import type { Train } from '../types/domain';
 import type { FollowState, FilterState } from '../types/ui';
 
@@ -23,21 +25,12 @@ export default function MapContent({
   onTrainClick,
   onFollowTrain,
 }: MapContentProps) {
-  const map = useMap();
-
-  // Follow selected train
-  useEffect(() => {
-    if (followState.enabled && followState.trainId) {
-      const train = trains.find((t) => t.id === followState.trainId);
-      if (train?.locationHypothesis?.position) {
-        const position = train.locationHypothesis.position;
-        map.setView([position.lat, position.lng], 14, {
-          animate: true,
-          duration: 1.0,
-        });
-      }
-    }
-  }, [followState, trains, map]);
+  // Use camera controller hook
+  const { cameraState, resetView, confidenceWarning } = useCameraController({
+    trains,
+    followTrainId: followState.enabled ? followState.trainId : null,
+    idleThresholdMs: 75000, // 75 seconds
+  });
 
   // Debug logging
   useEffect(() => {
@@ -47,7 +40,8 @@ export default function MapContent({
 
   return (
     <>
-      {/* Static layers: lines and stations */}
+      {/* Static layers: state boundaries, lines and stations */}
+      <StateBoundaries />
       <TransitLines filterState={filterState} />
       <StationsLayer />
       
@@ -67,6 +61,13 @@ export default function MapContent({
             />
           );
         })}
+      
+      {/* Camera controls and indicators */}
+      <CameraControls
+        cameraMode={cameraState.mode}
+        confidenceWarning={confidenceWarning}
+        onResetView={resetView}
+      />
     </>
   );
 }

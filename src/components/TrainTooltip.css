@@ -1,0 +1,172 @@
+/* Train Tooltip - Floating popup for train details */
+
+.train-tooltip-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.train-tooltip {
+  pointer-events: all;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 280px;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: tooltipFadeIn 0.2s ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.train-tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #2C3E50 0%, #34495e 100%);
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.train-tooltip-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.train-tooltip-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.train-tooltip-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.train-tooltip-content {
+  padding: 1.25rem;
+  overflow-y: auto;
+  max-height: calc(80vh - 140px);
+}
+
+.train-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  gap: 1rem;
+}
+
+.train-tooltip-row:last-child {
+  border-bottom: none;
+}
+
+.train-tooltip-label {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.875rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  flex-shrink: 0;
+}
+
+.train-tooltip-value {
+  color: #2C3E50;
+  text-align: right;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  word-break: break-word;
+}
+
+.train-tooltip-value.confidence-high {
+  color: #28a745;
+}
+
+.train-tooltip-value.confidence-medium {
+  color: #ffc107;
+}
+
+.train-tooltip-value.confidence-low {
+  color: #ff9800;
+}
+
+.train-tooltip-value.confidence-unknown {
+  color: #6c757d;
+}
+
+.train-tooltip-value.delay {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.train-tooltip-actions {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(248, 249, 250, 0.5);
+}
+
+.train-tooltip-follow {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: rgba(44, 62, 80, 0.08);
+  border: 1px solid rgba(44, 62, 80, 0.2);
+  border-radius: 8px;
+  color: #2C3E50;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.train-tooltip-follow:hover {
+  background: rgba(44, 62, 80, 0.12);
+  border-color: rgba(44, 62, 80, 0.3);
+}
+
+.train-tooltip-follow.active {
+  background: #2C3E50;
+  color: white;
+  border-color: #2C3E50;
+}
+
+.train-tooltip-follow.active:hover {
+  background: #1a252f;
+}
+

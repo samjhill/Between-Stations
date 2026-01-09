@@ -5,8 +5,7 @@
  * NOTE: This module is intended for build-time use (Node.js environment).
  * For browser use, schedules should be pre-processed to JSON files.
  * 
- * This is a simplified parser that works with text-extracted PDFs.
- * In production, you might want more sophisticated table extraction.
+ * This parser extracts all times at each station, then builds trips from time sequences.
  */
 
 import type { ScheduledTrip } from '../types/schedule';
@@ -15,40 +14,90 @@ import { parseTime, normalizeOvernightTimes } from './timeUtils';
 import { mapStationName } from './stationMapping';
 
 /**
+ * Map PDF filename patterns to canonical line names
+ * Filenames now include the full line name (e.g., "atlantic-city.pdf", "main-bergen.pdf")
+ */
+const FILENAME_TO_LINE_MAP: Record<string, string> = {
+  'atlantic-city': 'Atlantic City',
+  'main-bergen': 'Main/Bergen',
+  'montclair-boonton': 'Montclair-Boonton',
+  'morris-essex': 'Morris & Essex',
+  'north-jersey-coastline': 'North Jersey Coast',
+  'pascack-valley': 'Pascack Valley',
+  'raritan-valley': 'Raritan Valley',
+  'trenton': 'Northeast Corridor',
+};
+
+/**
+ * Extract line name from PDF filename
+ * Handles formats like:
+ * - "atlantic-city.pdf" → "Atlantic City"
+ * - "atlantic-city-weekend.pdf" → "Atlantic City"
+ * - "main-bergen.pdf" → "Main/Bergen"
+ */
+function extractLineNameFromFilename(filename: string): string {
+  // Remove .pdf extension
+  let nameWithoutExt = filename.replace(/\.pdf$/i, '');
+  
+  // Remove "-weekend" suffix if present
+  nameWithoutExt = nameWithoutExt.replace(/-weekend$/i, '');
+  
+  // Look up in filename-to-line mapping
+  const lineName = FILENAME_TO_LINE_MAP[nameWithoutExt];
+  if (lineName) {
+    return lineName;
+  }
+  
+  // Fallback: try to match partial patterns (for backwards compatibility)
+  // Check if any key in the map is contained in the filename
+  for (const [key, value] of Object.entries(FILENAME_TO_LINE_MAP)) {
+    if (nameWithoutExt.includes(key) || key.includes(nameWithoutExt)) {
+      return value;
+    }
+  }
+  
+  // Last resort: try old code-based approach for backwards compatibility
+  const lineCode = nameWithoutExt.split('-')[0].toUpperCase();
+  const mappedLine = LINE_NAME_MAP[lineCode];
+  if (mappedLine) {
+    return mappedLine;
+  }
+  
+  // If all else fails, return a normalized version of the filename
+  console.warn(`[PDF Parser] Could not map filename "${filename}" to a line name. Using normalized filename.`);
+  return nameWithoutExt
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+/**
  * Parse a PDF timetable file (Node.js only - use at build time)
- * This function requires Node.js fs and pdf-parse
  */
 export async function parseTimetablePDF(
   pdfPath: string,
   serviceType: 'weekday' | 'weekend'
 ): Promise<ScheduledTrip[]> {
-  // This function should only be called in Node.js environment (build scripts)
   if (typeof window !== 'undefined') {
     throw new Error('parseTimetablePDF can only be used in Node.js environment. Use pre-processed JSON schedules in the browser.');
   }
 
   try {
-    // Dynamic import for Node.js only dependencies
     const fs = await import('node:fs/promises');
     const path = await import('node:path');
     
-    // Use pdf-extraction which is more Node.js friendly
     const pdfExtraction = await import('pdf-extraction');
     const pdfBuffer = await fs.readFile(pdfPath);
     
     const result = await pdfExtraction.default(pdfBuffer, {
-      // Extract text only, no images
       normalizeWhitespace: true,
     });
     
     const text = result.text || '';
 
-    // Extract line name from filename (e.g., "NEC-WKDY-0082425.pdf" -> "NEC")
     const filename = path.basename(pdfPath);
-    const lineCode = filename.split('-')[0];
-    const lineId = LINE_NAME_MAP[lineCode] || lineCode;
+    const lineId = extractLineNameFromFilename(filename);
 
-    // Parse the text to extract trips
     return parseTimetableText(text, lineId, serviceType);
   } catch (error) {
     console.error(`[PDF Parser] Error parsing ${pdfPath}:`, error);
@@ -57,10 +106,61 @@ export async function parseTimetablePDF(
 }
 
 /**
+ * Station with all its times extracted
+ */
+interface StationTimes {
+  name: string;
+  times: Array<{ timeStr: string; hour: number; minute: number; lineIndex: number }>;
+  lineIndex: number;
+}
+
+/**
+ * Detect the correct line/branch ID based on stations in the trip
+ * This handles cases where one PDF contains multiple branches (e.g., ME PDF has both Morristown and Gladstone)
+ */
+function detectLineIdFromStations(
+  stops: Array<{ stop_id: string; station_name: string }>,
+  baseLineId: string
+): string {
+  // Get all station IDs and names in the trip
+  const stationIds = new Set(stops.map(s => s.stop_id));
+  const stationNames = stops.map(s => s.station_name.toLowerCase());
+
+  // Check for branch-specific terminal stations first (most specific checks)
+  
+  // Gladstone Branch: trips that include Gladstone (from ME PDF)
+  if (stationIds.has('GLD') || stationNames.some(name => name.includes('gladstone'))) {
+    return 'Gladstone Branch';
+  }
+
+  // Raritan Valley: trips that include High Bridge (terminal station for RVL)
+  if (stationIds.has('HB') || stationNames.some(name => name.includes('high bridge'))) {
+    return 'Raritan Valley';
+  }
+
+  // Montclair-Boonton: trips that include Boonton (terminal station)
+  // Only if coming from MB PDF (to avoid misclassification from other PDFs)
+  if (baseLineId === 'Montclair-Boonton' || baseLineId === 'Main/Bergen') {
+    if (stationIds.has('BON') || stationNames.some(name => name.includes('boonton'))) {
+      return 'Montclair-Boonton';
+    }
+    // If from Main/Bergen PDF but doesn't have Boonton, keep as Main/Bergen
+    if (baseLineId === 'Main/Bergen') {
+      return 'Main/Bergen';
+    }
+  }
+
+  // Morristown Line: trips that include Morristown (and not Gladstone, which we already checked)
+  // These stay as "Morris & Essex" since Morristown is the main line
+  // (Morristown Line is part of the Morris & Essex system)
+
+  // Default: return the base line ID from the PDF filename
+  return baseLineId;
+}
+
+/**
  * Parse timetable text content
- * Handles NJ Transit PDF format - supports both formats:
- * 1. Train numbers concatenated, station names with times on same line
- * 2. Train numbers spaced, station names on separate lines with times below
+ * New approach: Extract all times at each station, then build trips from time sequences
  */
 function parseTimetableText(
   text: string,
@@ -78,302 +178,406 @@ function parseTimetableText(
     direction = 'inbound';
   }
 
-  // Find AM/PM sections - there might be both
-  let amSectionEnd = -1;
-  let pmSectionStart = -1;
-  let amPmLineIndex = -1;
-  for (let i = 0; i < lines.length; i++) {
-    if ((lines[i].includes('A.M.') || lines[i].includes('A.M')) && amSectionEnd === -1) {
-      amSectionEnd = i + 50; // Estimate AM section extends ~50 lines
-      amPmLineIndex = i;
-    }
-    if (lines[i].includes('P.M.') || lines[i].includes('P.M')) {
-      pmSectionStart = i;
-      if (amPmLineIndex === -1) amPmLineIndex = i;
-      break;
-    }
-  }
-  if (amPmLineIndex === -1) amPmLineIndex = 0; // Default if not found
-
-  // Find train number line - could be concatenated or spaced, might have "TRAINS" prefix
-  let trainNumbers: string[] = [];
-  let trainNumberLineIndex = -1;
-  
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    
-    // Handle "TRAINS" prefix (Atlantic City format)
-    let workingLine = line;
-    if (line.includes('TRAINS')) {
-      workingLine = line.replace(/TRAINS\s+/i, '');
-    }
-    
-    // Try concatenated format (many 4-digit numbers together)
-    const fourDigitMatches = workingLine.match(/\d{4}/g);
-    if (fourDigitMatches && fourDigitMatches.length >= 5) {
-      trainNumbers = fourDigitMatches;
-      trainNumberLineIndex = i;
-      break;
-    }
-    
-    // Try spaced format (numbers separated by spaces)
-    const spacedNumbers = workingLine.split(/\s+/).filter(n => /^\d{2,4}$/.test(n));
-    if (spacedNumbers.length >= 5) {
-      trainNumbers = spacedNumbers;
-      trainNumberLineIndex = i;
-      break;
-    }
-  }
-  
-  // Check for multiple train number lines (North Jersey Coast has multiple lines)
-  // Look for additional lines with train numbers near the first one
-  if (trainNumberLineIndex >= 0 && trainNumberLineIndex < lines.length - 2) {
-    for (let i = trainNumberLineIndex + 1; i < Math.min(trainNumberLineIndex + 4, lines.length); i++) {
-      const line = lines[i];
-      // Skip AM/PM lines
-      if (line.includes('A.M.') || line.includes('P.M.') || line.includes('Departing')) {
-        continue;
-      }
-      
-      // Try to extract additional train numbers
-      const fourDigitMatches = line.match(/\d{4}/g);
-      if (fourDigitMatches && fourDigitMatches.length >= 3) {
-        trainNumbers.push(...fourDigitMatches);
-      } else {
-        const spacedNumbers = line.split(/\s+/).filter(n => /^\d{2,4}$/.test(n));
-        if (spacedNumbers.length >= 3) {
-          trainNumbers.push(...spacedNumbers);
-        }
-      }
-    }
-  }
-  
-  // Remove duplicates and sort
-  trainNumbers = [...new Set(trainNumbers)];
-
-  if (trainNumbers.length === 0) {
-    console.warn(`[PDF Parser] No train numbers found in ${lineId}`);
-    return [];
-  }
-
-  // Parse stations and times
-  // Format 1: Station name on one line, times on same or next line(s)
-  const stationRows: Array<{ name: string; times: string[]; lineIndex: number }> = [];
-  
-  // Look for station names (capitalized words, not numbers, not "A.M." etc.)
-  // Allow all caps (like "ATLANTIC CITY") or mixed case
-  const stationNamePattern = /^[A-Z][A-Za-z\s&'.,-]{2,}/;
+  // Extract all station rows with their times
+  const stationTimes: StationTimes[] = [];
   const timePattern = /\d{1,2}\.\d{2}/g;
-  
-  let i = Math.max(trainNumberLineIndex, amPmLineIndex) + 1;
-  while (i < lines.length) {
+  const stationNamePattern = /^[A-Z][A-Za-z\s&'.,-]{2,}/;
+
+  // Helper to extract all times from a string
+  const extractTimes = (text: string): Array<{ timeStr: string; hour: number; minute: number }> => {
+    const matches: Array<{ timeStr: string; hour: number; minute: number }> = [];
+    const regex = /\d{1,2}\.\d{2}/g;
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      const [hourStr, minuteStr] = match[0].split('.');
+      matches.push({
+        timeStr: match[0],
+        hour: parseInt(hourStr, 10),
+        minute: parseInt(minuteStr, 10),
+      });
+    }
+    return matches;
+  };
+
+  // Find all station rows and extract their times
+  // Handle two formats:
+  // 1. Station name and times on same line: "TRENTON3.474.175.06..."
+  // 2. Station name on one line, times on next line(s): "Mount Arlington\n6.10   6.22"
+  for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     
     // Skip notes, headers, etc.
     if (line.includes('NOTES:') || line.includes('EFFECTIVE') || 
         line.includes('Q indicates') || line.includes('TRAINS') ||
         line.includes('via ') || line.includes('arrive ') ||
+        line.includes('Departing from:') || line.includes('Jefferson Station') ||
+        line.includes('Suburban Station') || line.includes('30th Street Station') ||
         line.length < 3) {
-      i++;
       continue;
     }
     
     // Check if this looks like a station name
-    // Filter out lines that are clearly not stations (AM/PM labels, etc.)
-    // Also handle case where station name is directly followed by times (e.g., "ATLANTIC CITY4.11")
-    // Check if line starts with station-like text (even if followed by numbers)
     const startsWithStation = /^[A-Z][A-Za-z\s&'.,-]{2,}/.test(line);
     const hasTimes = timePattern.test(line);
     const isStationLike = startsWithStation && !line.match(/^\d/) && 
         !line.includes('A.M.') && !line.includes('P.M.') && 
         !line.includes('A.M') && !line.includes('P.M') &&
-        !line.match(/^[A-Z]\.[A-Z]\./) && // Don't match "A.M." pattern
-        (hasTimes || (i + 1 < lines.length && timePattern.test(lines[i + 1]))); // Must have times
+        !line.match(/^[A-Z]\.[A-Z]\./);
     
-    if (isStationLike) {
-      // Helper to extract times from a string (handles concatenated format)
-      const extractTimes = (text: string): string[] => {
-        // Match H.MM pattern, but handle concatenated cases
-        // Split on patterns like "4.445.17" -> ["4.44", "5.17"]
-        const matches: string[] = [];
-        const regex = /\d{1,2}\.\d{2}/g;
-        let match;
-        while ((match = regex.exec(text)) !== null) {
-          matches.push(match[0]);
-        }
-        return matches;
-      };
-      
-      // Extract station name - might have times attached directly
+    // Format 1: Station name and times on same line
+    const isStationWithTimes = isStationLike && hasTimes;
+    // Format 2: Station name on this line, times on next line(s)
+    const isStationNameOnly = isStationLike && !hasTimes && 
+        i + 1 < lines.length && timePattern.test(lines[i + 1]) &&
+        !stationNamePattern.test(lines[i + 1]); // Next line is not another station
+    
+    if (isStationWithTimes || isStationNameOnly) {
+      // Extract station name
       let stationName = line.trim();
+      let lineForTimes = '';
       
-      // If line has times directly attached (e.g., "ATLANTIC CITY4.11"), split them
-      const timeMatch = line.match(/^([A-Z][A-Za-z\s&'.,-]+?)(\d{1,2}\.\d{2})/);
-      let lineForTimes = line;
-      if (timeMatch) {
-        stationName = timeMatch[1].trim();
-        // Remove the station name part, keep the times
-        lineForTimes = line.substring(timeMatch[1].length);
-      }
-      
-      // Look ahead for times on this line or next few lines
-      // Times can be concatenated like "4.445.175.516.08" or spaced
-      const times: string[] = [];
-      let timesFound = false;
-      
-      // Check current line first - times may be on same line as station name
-      const currentTimes = extractTimes(lineForTimes);
-      if (currentTimes && currentTimes.length > 0) {
-        times.push(...currentTimes);
-        timesFound = true;
-      }
-      
-      // Also check the original line in case times are elsewhere
-      if (currentTimes.length === 0) {
-        const allTimes = extractTimes(line);
-        if (allTimes && allTimes.length > 0) {
-          times.push(...allTimes);
-          timesFound = true;
+      if (isStationWithTimes) {
+        // Format 1: Station name and times on same line
+        // Try to match station name before first time pattern
+        // Handle cases like "PHILADELPHIA 30TH ST.5.47" or "TRENTON3.47"
+        const timeMatch = line.match(/^([A-Z][A-Za-z\s&'.,-]+?)(\d{1,2}\.\d{2})/);
+        if (timeMatch) {
+          stationName = timeMatch[1].trim();
+          lineForTimes = line.substring(timeMatch[1].length);
+        } else {
+          // Try alternative: look for common station name patterns followed by spaces and times
+          const spacedTimeMatch = line.match(/^([A-Z][A-Za-z\s&'.,-]{3,}?)\s+(\d{1,2}\.\d{2})/);
+          if (spacedTimeMatch) {
+            stationName = spacedTimeMatch[1].trim();
+            lineForTimes = line.substring(spacedTimeMatch[1].length).trim();
+          } else {
+            // Last resort: find where times start (first occurrence of digit.digit pattern)
+            const firstTimeMatch = line.match(/(\d{1,2}\.\d{2})/);
+            if (firstTimeMatch && firstTimeMatch.index !== undefined) {
+              stationName = line.substring(0, firstTimeMatch.index).trim();
+              lineForTimes = line.substring(firstTimeMatch.index);
+            } else {
+              lineForTimes = line;
+            }
+          }
         }
+      } else {
+        // Format 2: Station name only, times on next line(s)
+        // Times will be extracted from next lines
+      }
+      
+      // Clean up station name
+      stationName = stationName.replace(/\.+$/, '').trim();
+      
+      // Skip if station name is too short or looks invalid
+      if (stationName.length < 3 || /^[A-Z]$/.test(stationName)) {
+        continue;
+      }
+      
+      // Extract all times from this line and next few lines
+      const allTimes: Array<{ timeStr: string; hour: number; minute: number; lineIndex: number }> = [];
+      
+      // Check current line first (if it has times)
+      if (lineForTimes) {
+        const currentTimes = extractTimes(lineForTimes);
+        currentTimes.forEach(t => {
+          allTimes.push({ ...t, lineIndex: i });
+        });
       }
       
       // Check next few lines for times (but not if it's another station)
-      for (let j = 1; j <= 3 && i + j < lines.length; j++) {
+      // For format 2, start from next line; for format 1, continue from current
+      const startJ = isStationNameOnly ? 1 : (lineForTimes ? 1 : 0);
+      for (let j = startJ; j <= 5 && i + j < lines.length; j++) {
         const nextLine = lines[i + j];
         // If next line is clearly another station name (capitalized, no numbers), stop
-        if (stationNamePattern.test(nextLine) && !extractTimes(nextLine).length) {
+        if (stationNamePattern.test(nextLine) && !extractTimes(nextLine).length && j > 1) {
           break;
         }
         const nextTimes = extractTimes(nextLine);
-        if (nextTimes && nextTimes.length > 0) {
-          // Only add if it looks like times, not a station name
-          if (!stationNamePattern.test(nextLine) || extractTimes(nextLine).length > 2) {
-            times.push(...nextTimes);
-            timesFound = true;
-            // If times were on a separate line, advance past it
-            if (j === 1 && currentTimes.length === 0) {
-              i++; // Skip the time line
+        if (nextTimes.length > 0) {
+          // Add times if line doesn't look like a station name, or has many times
+          if (!stationNamePattern.test(nextLine) || nextTimes.length > 2) {
+            nextTimes.forEach(t => {
+              allTimes.push({ ...t, lineIndex: i + j });
+            });
+            // For format 2, stop after first line with times
+            if (isStationNameOnly && j === 1) {
+              break;
             }
           } else {
-            break; // Looks like another station
+            break;
           }
+        } else if (isStationNameOnly && j === 1) {
+          // For format 2, if first next line has no times, this might not be a valid station
+          break;
         }
       }
       
-      if (timesFound && times.length > 0) {
-        stationRows.push({
+      if (allTimes.length > 0) {
+        stationTimes.push({
           name: stationName,
-          times,
+          times: allTimes,
           lineIndex: i,
         });
       }
     }
-    
-    i++;
   }
 
-  if (stationRows.length === 0) {
+  if (stationTimes.length === 0) {
     console.warn(`[PDF Parser] No station rows found in ${lineId}`);
     return [];
   }
 
-  // Create trips - one per train number
-  for (let trainIndex = 0; trainIndex < trainNumbers.length; trainIndex++) {
-    const trainId = trainNumbers[trainIndex];
-    const stops: Array<{ stop_id: string; station_name: string; arrival_time: number }> = [];
-
-    // Extract time for this train at each station
-    // Keep track of last station to avoid duplicates
-    let lastStationId = '';
-    for (const stationRow of stationRows) {
-      // Times might not align perfectly with train positions
-      // Try to match by position, but be flexible
-      if (trainIndex < stationRow.times.length) {
-        const timeStr = stationRow.times[trainIndex];
-        
-        // Convert "H.MM" format to "H:MM AM/PM"
-        const [hours, minutes] = timeStr.split('.');
-        const hourNum = parseInt(hours, 10);
-        const minStr = minutes || '00';
-        const minNum = parseInt(minStr, 10);
-        
-        // Determine AM/PM based on section and hour
-        // Check if this station row is in AM or PM section
-        const isInAMSection = amSectionEnd > 0 && stationRow.lineIndex < amSectionEnd;
-        const isInPMSection = pmSectionStart > 0 && stationRow.lineIndex >= pmSectionStart;
-        
-        let hour24 = hourNum;
-        let meridiem = 'AM';
-        
-        // Use section if available, otherwise use hour-based heuristic
-        if (isInPMSection) {
-          meridiem = 'PM';
-          if (hourNum < 12) {
-            hour24 = hourNum + 12;
-          } else if (hourNum === 12) {
-            hour24 = 12;
-          }
-        } else if (isInAMSection) {
-          meridiem = 'AM';
-          if (hourNum === 12) {
-            hour24 = 0;
-          } else {
-            hour24 = hourNum;
-          }
-        } else {
-          // Heuristic: early hours (1-6) are AM, later (7-11) could be either
-          // For safety, assume AM for hours 1-11, PM only if hour is 12 or very high
-          if (hourNum >= 1 && hourNum <= 11) {
-            meridiem = 'AM';
-            hour24 = hourNum;
-          } else if (hourNum === 12) {
-            // Noon - typically PM for transit schedules
-            meridiem = 'PM';
-            hour24 = 12;
-          } else {
-            // Shouldn't happen, but handle it
-            meridiem = 'AM';
-            hour24 = hourNum % 12;
-          }
-        }
-        
-        const timeFormatted = `${hour24}:${minStr.padStart(2, '0')} ${meridiem}`;
-        const timeSeconds = parseTime(timeFormatted);
-        
-        if (timeSeconds !== null) {
-          const mappedStation = mapStationName(stationRow.name, lineId);
-          if (mappedStation && mappedStation.id !== lastStationId) {
-            stops.push({
-              stop_id: mappedStation.id,
-              station_name: mappedStation.name,
-              arrival_time: timeSeconds,
-            });
-            lastStationId = mappedStation.id;
+  // Now build trips from time sequences
+  // Strategy: For each time at the first station, try to find a matching sequence
+  // of times at subsequent stations that progress logically
+  
+  // Group times by hour to help with AM/PM detection
+  const detectAMPM = (stationTimesList: StationTimes[]): Map<number, 'AM' | 'PM'> => {
+    const timeContext = new Map<number, 'AM' | 'PM'>();
+    
+    // Look for patterns: 12.x followed by 1-11.x (PM pattern)
+    // Or early hours (1-6) followed by later hours (7-12) (AM to PM transition)
+    for (const station of stationTimesList) {
+      const hours = station.times.map(t => t.hour);
+      
+      // Check for 12.x -> 1-11.x pattern
+      for (let i = 0; i < hours.length - 1; i++) {
+        if (hours[i] === 12 && hours[i + 1] >= 1 && hours[i + 1] <= 11) {
+          // Mark 12.x and subsequent 1-11.x as PM
+          for (let j = i; j < hours.length; j++) {
+            if (hours[j] === 12 || (hours[j] >= 1 && hours[j] <= 11)) {
+              timeContext.set(station.times[j].lineIndex * 10000 + j, 'PM');
+            }
           }
         }
       }
+      
+      // Check for early hours (1-6) -> later hours (7-12) transition
+      for (let i = 0; i < hours.length - 1; i++) {
+        if (hours[i] >= 1 && hours[i] <= 6 && hours[i + 1] >= 7 && hours[i + 1] <= 12) {
+          // Times before transition are AM, after are PM
+          for (let j = 0; j <= i; j++) {
+            if (hours[j] >= 1 && hours[j] <= 6) {
+              timeContext.set(station.times[j].lineIndex * 10000 + j, 'AM');
+            }
+          }
+          for (let j = i + 1; j < hours.length; j++) {
+            if (hours[j] >= 7 && hours[j] <= 12) {
+              timeContext.set(station.times[j].lineIndex * 10000 + j, 'PM');
+            }
+          }
+        }
+      }
+      
+      // If times start with 7-12 and we're in a later part of the PDF, likely PM
+      if (station.lineIndex > 50 && hours.length > 0 && hours[0] >= 7 && hours[0] <= 12) {
+        station.times.forEach((t, idx) => {
+          if (t.hour >= 7 && t.hour <= 12) {
+            timeContext.set(t.lineIndex * 10000 + idx, 'PM');
+          }
+        });
+      }
+    }
+    
+    return timeContext;
+  };
+
+  const ampmContext = detectAMPM(stationTimes);
+
+  // Find AM/PM indicator line to determine which columns are AM vs PM
+  const findAMPMColumns = (): Map<number, 'AM' | 'PM'> => {
+    const columnAMPM = new Map<number, 'AM' | 'PM'>();
+    
+    // Look for AM/PM indicator lines in the text
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if ((line.includes('A.M.') || line.includes('A.M') || line.includes('P.M.') || line.includes('P.M')) &&
+          (line.match(/A\.M\.?/g) || []).length + (line.match(/P\.M\.?/g) || []).length >= 5) {
+        // This is an AM/PM indicator line
+        const amMatches = line.match(/A\.M\.?/g) || [];
+        const pmMatches = line.match(/P\.M\.?/g) || [];
+        const amCount = amMatches.length;
+        
+        // Mark columns: first amCount columns are AM, rest are PM
+        for (let col = 0; col < amCount; col++) {
+          columnAMPM.set(col, 'AM');
+        }
+        for (let col = amCount; col < amCount + pmMatches.length; col++) {
+          columnAMPM.set(col, 'PM');
+        }
+        break; // Use first valid AM/PM line
+      }
+    }
+    
+    return columnAMPM;
+  };
+
+  const columnAMPM = findAMPMColumns();
+
+  // Build trips by matching times by COLUMN POSITION (not time sequence)
+  // In PDFs, times are arranged in columns - same column = same train
+  const usedTimes = new Set<string>();
+  let tripCounter = 0;
+
+  if (stationTimes.length === 0) return [];
+
+  // Find the maximum number of times across all stations (number of trains/columns)
+  const maxTimes = Math.max(...stationTimes.map(s => s.times.length));
+  
+  // Build trips by column position
+  for (let columnIdx = 0; columnIdx < maxTimes; columnIdx++) {
+    const stops: Array<{ stop_id: string; station_name: string; arrival_time: number }> = [];
+    let currentIsPM: boolean | null = null;
+    
+    // For each station, try to get the time at this column position
+    for (let stationIdx = 0; stationIdx < stationTimes.length; stationIdx++) {
+      const station = stationTimes[stationIdx];
+      
+      // Skip if this station doesn't have a time at this column
+      if (columnIdx >= station.times.length) {
+        continue; // Express train - skip this station
+      }
+      
+      const time = station.times[columnIdx];
+      const timeKey = `${station.lineIndex}-${time.timeStr}-${columnIdx}`;
+      
+      // Skip if we've already used this time (shouldn't happen, but safety check)
+      if (usedTimes.has(timeKey)) {
+        continue;
+      }
+      
+      // Determine AM/PM for this time
+      // Priority: column AM/PM indicator > context > heuristics
+      let isPM = false;
+      
+      if (columnAMPM.has(columnIdx)) {
+        // Use column-level AM/PM indicator (most reliable)
+        isPM = columnAMPM.get(columnIdx) === 'PM';
+      } else {
+        // Fall back to context or heuristics
+        const contextKey = time.lineIndex * 10000 + columnIdx;
+        isPM = ampmContext.get(contextKey) === 'PM';
+        
+        if (!ampmContext.has(contextKey)) {
+          // Use heuristics or inherit from previous station in same column
+          if (currentIsPM !== null) {
+            isPM = currentIsPM; // Inherit from previous station
+          } else if (time.hour >= 7 && time.hour <= 12 && station.lineIndex > 50) {
+            isPM = true;
+          } else if (time.hour >= 1 && time.hour <= 6) {
+            isPM = false;
+          } else {
+            isPM = time.hour >= 7; // Default heuristic
+          }
+        }
+      }
+      
+      currentIsPM = isPM;
+      
+      // Convert to 24-hour format
+      let hour24 = time.hour;
+      if (isPM && time.hour < 12) {
+        hour24 = time.hour + 12;
+      } else if (!isPM && time.hour === 12) {
+        hour24 = 0;
+      }
+      
+      const timeSeconds = hour24 * 3600 + time.minute * 60;
+      const mappedStation = mapStationName(station.name, lineId);
+      
+      if (mappedStation) {
+        // Validate: time should be after the last stop (or handle overnight)
+        let isValidTime = true;
+        if (stops.length > 0) {
+          const lastTime = stops[stops.length - 1].arrival_time;
+          let timeDiff = timeSeconds - lastTime;
+          if (timeDiff < 0) timeDiff += 86400; // Overnight
+          
+          // Time should be at least 1 minute after last stop, and at most 4 hours
+          if (timeDiff < 60 || timeDiff > 14400) {
+            isValidTime = false;
+          }
+          
+          // Don't add duplicate stations (same station ID)
+          if (mappedStation.id === stops[stops.length - 1].stop_id) {
+            isValidTime = false;
+          }
+        }
+        
+        if (isValidTime) {
+          // Additional check: don't add if this station was just added (prevents duplicates)
+          if (stops.length > 0 && stops[stops.length - 1].stop_id === mappedStation.id) {
+            // Same station as last - skip (might be from different section)
+            continue;
+          }
+          
+          stops.push({
+            stop_id: mappedStation.id,
+            station_name: mappedStation.name,
+            arrival_time: timeSeconds,
+          });
+          usedTimes.add(timeKey);
+        }
+      }
+      // Continue even if station doesn't map (express train might skip unmapped stations)
     }
 
-    // Only create trip if it has at least 2 stops
-    if (stops.length >= 2) {
-      trips.push({
-        train_id: trainId,
-        line_id: lineId,
-        direction,
-        stops,
-        service_type: serviceType,
-      });
+    // Remove any remaining duplicates (by station ID) before creating trip
+    const uniqueStops: typeof stops = [];
+    const seenStationIds = new Set<string>();
+    for (const stop of stops) {
+      if (!seenStationIds.has(stop.stop_id)) {
+        uniqueStops.push(stop);
+        seenStationIds.add(stop.stop_id);
+      }
     }
-  }
-
-  // Normalize overnight times for each trip
-  for (const trip of trips) {
-    if (trip.stops.length > 1) {
-      const times = trip.stops.map(s => s.arrival_time);
+    
+    // Only create trip if it has at least 3 stops (more realistic)
+    // But allow 2 stops for very short routes
+    if (uniqueStops.length >= 2) {
+      tripCounter++;
+      const trainId = `AUTO-${tripCounter}`;
+      
+      // Normalize overnight times
+      const times = uniqueStops.map(s => s.arrival_time);
       const normalized = normalizeOvernightTimes(times);
-      trip.stops.forEach((stop, i) => {
+      uniqueStops.forEach((stop, i) => {
         stop.arrival_time = normalized[i];
       });
+      
+      // Sort by time
+      uniqueStops.sort((a, b) => a.arrival_time - b.arrival_time);
+      
+      // Final validation: ensure times are in reasonable order
+      let isValidTrip = true;
+      for (let i = 1; i < uniqueStops.length; i++) {
+        const prevTime = uniqueStops[i - 1].arrival_time;
+        const currTime = uniqueStops[i].arrival_time;
+        let timeDiff = currTime - prevTime;
+        if (timeDiff < 0) timeDiff += 86400; // Overnight
+        
+        // Times should be increasing and reasonable (1 min to 4 hours)
+        if (timeDiff < 60 || timeDiff > 14400) {
+          isValidTrip = false;
+          break;
+        }
+      }
+      
+      if (isValidTrip) {
+        // Detect the correct line/branch ID based on stations in the trip
+        // This handles cases where one PDF contains multiple branches
+        const detectedLineId = detectLineIdFromStations(uniqueStops, lineId);
+        
+        trips.push({
+          train_id: trainId,
+          line_id: detectedLineId,
+          direction,
+          stops: uniqueStops,
+          service_type: serviceType,
+        });
+      }
     }
   }
 
@@ -411,4 +615,3 @@ export async function loadAllTimetables(
   console.log(`[PDF Parser] Loaded ${allTrips.length} total trips for ${serviceType}`);
   return allTrips;
 }
-

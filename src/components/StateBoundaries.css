@@ -1,0 +1,11 @@
+/* State boundaries styling - beautiful, minimal design */
+
+/* Ensure boundaries render behind transit lines but above background */
+.state-boundary-layer {
+  z-index: 100;
+}
+
+/* Smooth transitions for hover effects */
+.state-boundary-layer path {
+  transition: all 0.3s ease;
+}

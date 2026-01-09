@@ -24,7 +24,7 @@ export const STATION_DATABASE: StationData[] = [
   { id: 'NYP', name: 'New York Penn Station', position: { lat: 40.7506, lng: -73.9935 } },
   { id: 'NWK', name: 'Newark Penn Station', position: { lat: 40.7347, lng: -74.1642 }, aliases: ['Newark', 'Newark Penn'] },
   { id: 'HOB', name: 'Hoboken', position: { lat: 40.7380, lng: -74.0307 } },
-  { id: 'TRE', name: 'Trenton', position: { lat: 40.2176, lng: -74.7425 } },
+  { id: 'TRE', name: 'Trenton', position: { lat: 40.2176, lng: -74.7425 }, aliases: ['Trenton Transit Center'] },
   { id: 'SEC', name: 'Secaucus Junction', position: { lat: 40.7589, lng: -74.0771 }, aliases: ['Secaucus'] },
   
   // Northeast Corridor
@@ -78,7 +78,7 @@ export const STATION_DATABASE: StationData[] = [
   { id: 'HB', name: 'High Bridge', position: { lat: 40.6682, lng: -74.8959 } },
   
   // Atlantic City
-  { id: 'P30', name: 'Philadelphia 30th Street', position: { lat: 39.9558, lng: -75.1821 }, aliases: ['30th Street', 'Philadelphia', 'PHILADELPHIA 30TH ST.'] },
+  { id: 'P30', name: 'Philadelphia 30th Street', position: { lat: 39.9558, lng: -75.1821 }, aliases: ['30th Street', 'Philadelphia', 'PHILADELPHIA 30TH ST.', 'PHILADELPHIA 30TH ST'] },
   { id: 'CHL', name: 'Cherry Hill', position: { lat: 39.9348, lng: -75.0306 } },
   { id: 'ATC', name: 'Atlantic City', position: { lat: 39.3643, lng: -74.4229 }, aliases: ['ATLANTIC CITY'] },
   { id: 'ABS', name: 'Absecon', position: { lat: 39.4285, lng: -74.4957 } },
