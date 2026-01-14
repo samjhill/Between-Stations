@@ -78,6 +78,7 @@ function findCurrentSegment(
   }
 
   // Find consecutive stops where current time is between them
+  // Use < instead of <= so that when we reach/pass the arrival time, we advance to next segment
   for (let i = 0; i < trip.stops.length - 1; i++) {
     const fromStop = trip.stops[i];
     const toStop = trip.stops[i + 1];
@@ -88,7 +89,13 @@ function findCurrentSegment(
       toStopTime += 86400;
     }
 
-    if (adjustedCurrentTime >= fromStop.arrival_time && adjustedCurrentTime <= toStopTime) {
+    // If current time is before this segment starts, continue to next segment
+    if (adjustedCurrentTime < fromStop.arrival_time) {
+      continue;
+    }
+
+    // If current time is within this segment (before destination arrival), use this segment
+    if (adjustedCurrentTime < toStopTime) {
       // Calculate progress along segment
       const segmentDuration = toStopTime - fromStop.arrival_time;
       const elapsed = adjustedCurrentTime - fromStop.arrival_time;
@@ -100,6 +107,9 @@ function findCurrentSegment(
         progress: Math.max(0, Math.min(1, progress)), // Clamp to [0, 1]
       };
     }
+    
+    // If we've reached or passed this segment's destination, continue to check next segment
+    // (The loop will continue and check the next segment)
   }
 
   // If we're before first stop, return first segment with 0 progress
@@ -111,8 +121,8 @@ function findCurrentSegment(
     };
   }
 
-  // If we're after last stop, return last segment with 1.0 progress
-  if (adjustedCurrentTime > trip.stops[trip.stops.length - 1].arrival_time) {
+  // If we're at or after last stop, return last segment with 1.0 progress
+  if (adjustedCurrentTime >= trip.stops[trip.stops.length - 1].arrival_time) {
     const lastIndex = trip.stops.length - 1;
     return {
       fromStop: trip.stops[lastIndex - 1],
@@ -232,10 +242,19 @@ export class TimetableProvider extends BaseProvider {
       }
 
       // Determine next stop
-      const nextStopIndex = trip.stops.findIndex(s => s.stop_id === segment.toStop.stop_id);
-      const nextStop = nextStopIndex >= 0 && nextStopIndex < trip.stops.length - 1
-        ? trip.stops[nextStopIndex + 1].station_name
-        : segment.toStop.station_name;
+      // If progress < 1.0, train is still traveling TO toStop, so next stop is toStop
+      // If progress >= 1.0, train has reached toStop, so next stop is the stop after toStop
+      let nextStop: string;
+      if (segment.progress < 1.0) {
+        // Train is still heading to the destination of the current segment
+        nextStop = segment.toStop.station_name;
+      } else {
+        // Train has reached toStop, find the next stop after it
+        const nextStopIndex = trip.stops.findIndex(s => s.stop_id === segment.toStop.stop_id);
+        nextStop = nextStopIndex >= 0 && nextStopIndex < trip.stops.length - 1
+          ? trip.stops[nextStopIndex + 1].station_name
+          : segment.toStop.station_name; // Fallback if toStop is the last stop
+      }
 
       trains.push({
         trainNumber: trip.train_id,
