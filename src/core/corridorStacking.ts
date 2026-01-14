@@ -13,7 +13,7 @@ import type L from 'leaflet';
  */
 const STACKING_CONFIG = {
   /** Fixed spacing between parallel lines in screen pixels */
-  lineSpacing: 12, // 12 pixels spacing for visible separation (accounts for 12px line width)
+  lineSpacing: 28, // 28 pixels spacing for better visual separation (accounts for 12px line width)
   /** Tolerance for detecting shared segments (in degrees, roughly) */
   segmentTolerance: 0.0005, // ~55 meters at equator - tighter tolerance for better detection
   /** Minimum segment length to consider for sharing (in degrees) */
@@ -315,36 +315,62 @@ export function applyCorridorOffsets(
   }
 
   // Second pass: apply offsets using actual segment geometry
+  // Handle transitions smoothly to avoid loops while maintaining separation at junctions
   for (let i = 0; i < N; i++) {
     const current = stations[i];
     let appliedOffset: number | null = null;
     let segmentFrom: [number, number] | null = null;
     let segmentTo: [number, number] | null = null;
 
-    // Determine which offset to use and which segment to base it on
-    if (i < N - 1 && segmentOffsets.has(i)) {
-      // Current segment (i -> i+1) is in a corridor
+    // Check if point is part of corridor segments
+    const prevSegmentInCorridor = i > 0 && segmentOffsets.has(i - 1);
+    const nextSegmentInCorridor = i < N - 1 && segmentOffsets.has(i);
+    const isFirstPoint = i === 0;
+    const isLastPoint = i === N - 1;
+
+    // Apply offset to maintain separation at junctions and within corridors
+    // Strategy: Use offset from corridor segments, but avoid creating loops
+    if (prevSegmentInCorridor && nextSegmentInCorridor) {
+      // Point is fully within corridor - use current segment's offset
       appliedOffset = segmentOffsets.get(i)!;
       segmentFrom = stations[i];
       segmentTo = stations[i + 1];
-    } else if (i > 0 && segmentOffsets.has(i - 1)) {
-      // Previous segment (i-1 -> i) was in a corridor
-      // Use same offset for continuity at the endpoint
+    } else if (prevSegmentInCorridor && !nextSegmentInCorridor) {
+      // Transitioning FROM corridor TO non-corridor
+      // Apply offset based on previous segment to maintain separation at junction
+      // This prevents overlap when lines diverge from shared corridors
+      appliedOffset = segmentOffsets.get(i - 1)!;
+      segmentFrom = stations[i - 1];
+      segmentTo = stations[i];
+    } else if (!prevSegmentInCorridor && nextSegmentInCorridor) {
+      // Transitioning FROM non-corridor TO corridor
+      // Apply offset based on next segment to maintain separation at junction
+      // This prevents overlap when lines converge into shared corridors
+      appliedOffset = segmentOffsets.get(i)!;
+      segmentFrom = stations[i];
+      segmentTo = stations[i + 1];
+    } else if (isFirstPoint && nextSegmentInCorridor) {
+      // First point, next segment is in corridor
+      appliedOffset = segmentOffsets.get(i)!;
+      segmentFrom = stations[i];
+      segmentTo = stations[i + 1];
+    } else if (isLastPoint && prevSegmentInCorridor) {
+      // Last point, previous segment was in corridor
       appliedOffset = segmentOffsets.get(i - 1)!;
       segmentFrom = stations[i - 1];
       segmentTo = stations[i];
     }
 
-      if (appliedOffset !== null && segmentFrom && segmentTo) {
-        // Apply perpendicular offset using the segment geometry
-        const offsetPoint = computePerpendicularOffset(
-          current,
-          segmentFrom,
-          segmentTo,
-          appliedOffset,
-          map
-        );
-        offsetStations.push(offsetPoint);
+    if (appliedOffset !== null && segmentFrom && segmentTo) {
+      // Apply perpendicular offset using the segment geometry
+      const offsetPoint = computePerpendicularOffset(
+        current,
+        segmentFrom,
+        segmentTo,
+        appliedOffset,
+        map
+      );
+      offsetStations.push(offsetPoint);
     } else {
       // No offset needed, use original point
       offsetStations.push(current);

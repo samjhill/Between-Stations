@@ -37,8 +37,16 @@ function TransitLines({ filterState, onLineClick, linesToRender }: TransitLinesP
             smoothFactor: 1.0, // No smoothing - use exact points
             } as PolylineOptions
           }
+          interactive={true}
           eventHandlers={{
             click: (e: LeafletMouseEvent) => {
+              // Only handle line clicks if not clicking on a station marker
+              // Check if click target is a station marker
+              const target = e.originalEvent?.target as HTMLElement;
+              if (target?.closest('.leaflet-interactive[fill-opacity]')) {
+                // Likely clicked on a station marker, let it handle the click
+                return;
+              }
               // Prevent clicks from bubbling to the map container
               e.originalEvent?.stopPropagation();
               // Polyline click includes map lat/lng

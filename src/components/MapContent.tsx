@@ -18,8 +18,10 @@ interface MapContentProps {
   selectedTrain: Train | null;
   followState: FollowState;
   filterState: FilterState;
+  selectedStationName: string | null;
   onTrainClick: (train: Train) => void;
   onLineClick: (lineId: string, clickLatLng: { lat: number; lng: number }) => void;
+  onStationClick: (stationName: string) => void;
 }
 
 function MapContent({
@@ -27,8 +29,10 @@ function MapContent({
   selectedTrain,
   followState,
   filterState,
+  selectedStationName,
   onTrainClick,
   onLineClick,
+  onStationClick,
 }: MapContentProps) {
   const map = useMap();
   const mapTick = useMapTick();
@@ -90,7 +94,8 @@ function MapContent({
       {/* Static layers: state boundaries, lines and stations */}
       <StateBoundaries />
       <TransitLines filterState={filterState} onLineClick={onLineClick} linesToRender={linesToRender} />
-      <StationsLayer />
+      {/* Stations rendered after lines so they appear on top and are clickable */}
+      <StationsLayer selectedStationName={selectedStationName} onStationClick={onStationClick} />
       
       {/* Animated layer: trains */}
       {trainsWithPositions.map((train) => {

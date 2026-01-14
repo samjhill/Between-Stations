@@ -202,6 +202,11 @@
   transform: translateX(0);
 }
 
+/* Station panel - appears when train list sidebar is closed */
+.app-sidebar.station-panel {
+  z-index: 999;
+}
+
 .sidebar-header {
   display: flex;
   justify-content: space-between;

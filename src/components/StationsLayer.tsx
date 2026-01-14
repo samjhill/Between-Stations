@@ -10,12 +10,17 @@ interface Station {
   isMajor: boolean;
 }
 
+interface StationsLayerProps {
+  selectedStationName: string | null;
+  onStationClick: (stationName: string) => void;
+}
+
 /**
  * StationsLayer component - renders MiniMetro-style station markers
  * - Minor stations: small white circles with dark outline
  * - Major stations: larger circles or rings with dark outline
  */
-function StationsLayer() {
+function StationsLayer({ selectedStationName, onStationClick }: StationsLayerProps) {
   const map = useMap();
   const [zoom, setZoom] = useState(10);
 
@@ -59,7 +64,7 @@ function StationsLayer() {
       {stations.map((station) => {
         // Major stations: larger radius, more prominent
         // Minor stations: smaller radius, subtle
-        const radius = station.isMajor ? 10 : 4;
+        const radius = station.isMajor ? 12 : 5;
         const stationElements = [];
         
         // Double ring for major stations (outer ring) - more prominent
@@ -68,13 +73,13 @@ function StationsLayer() {
             <CircleMarker
               key={`station-ring-outer-${station.name}`}
               center={[station.lat, station.lng]}
-              radius={radius + 5}
+              radius={radius + 6}
               pathOptions={{
                 fillColor: 'transparent',
                 fillOpacity: 0,
                 color: 'var(--map-stroke)',
-                weight: 2.5,
-                opacity: 0.5,
+                weight: 2,
+                opacity: 0.4,
                 dashArray: '4, 4',
               }}
             />
@@ -84,31 +89,69 @@ function StationsLayer() {
             <CircleMarker
               key={`station-ring-inner-${station.name}`}
               center={[station.lat, station.lng]}
-              radius={radius + 2}
+              radius={radius + 3}
               pathOptions={{
                 fillColor: 'transparent',
                 fillOpacity: 0,
                 color: 'var(--map-stroke)',
-                weight: 2,
-                opacity: 0.7,
+                weight: 1.5,
+                opacity: 0.6,
                 dashArray: '3, 3',
               }}
             />
           );
         }
         
-        // Main station marker
+        const isSelected = selectedStationName === station.name;
+        
+        // Invisible larger clickable area - rendered first so it's underneath visually but captures clicks
+        stationElements.push(
+          <CircleMarker
+            key={`station-clickable-${station.name}`}
+            center={[station.lat, station.lng]}
+            radius={Math.max(radius + 8, 20)}
+            pathOptions={{
+              fillColor: 'transparent',
+              fillOpacity: 0,
+              color: 'transparent',
+              weight: 0,
+              opacity: 0,
+            }}
+            interactive={true}
+            bubblingMouseEvents={false}
+            eventHandlers={{
+              click: (e) => {
+                e.originalEvent.stopPropagation();
+                e.originalEvent.preventDefault();
+                console.log('Station clicked (invisible area):', station.name);
+                onStationClick(station.name);
+              },
+            }}
+          />
+        );
+        
+        // Main station marker with larger interactive radius
         stationElements.push(
           <CircleMarker
             key={`station-${station.name}`}
             center={[station.lat, station.lng]}
             radius={radius}
             pathOptions={{
-              fillColor: station.isMajor ? '#FFFFFF' : '#FFFFFF',
-              fillOpacity: 1,
-              color: 'var(--map-stroke)',
-              weight: station.isMajor ? 3.5 : 1.5,
+              fillColor: isSelected ? '#60A5FA' : '#FFFFFF',
+              fillOpacity: isSelected ? 0.9 : 1,
+              color: isSelected ? '#3B82F6' : 'var(--map-stroke)',
+              weight: isSelected ? (station.isMajor ? 4 : 3) : (station.isMajor ? 3 : 1.5),
               opacity: 1,
+            }}
+            interactive={true}
+            bubblingMouseEvents={false}
+            eventHandlers={{
+              click: (e) => {
+                e.originalEvent.stopPropagation();
+                e.originalEvent.preventDefault();
+                console.log('Station clicked:', station.name);
+                onStationClick(station.name);
+              },
             }}
           >
             {showLabels && (
@@ -118,13 +161,14 @@ function StationsLayer() {
                 offset={[station.isMajor ? 12 : 6, 0]}
                 className="station-label-tooltip"
                 opacity={1}
+                interactive={false}
               >
                 <span
                   style={{
                     fontSize: station.isMajor ? '12px' : '10px',
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: station.isMajor ? '700' : '400',
-                    color: 'var(--map-label)',
+                    fontWeight: isSelected ? '700' : (station.isMajor ? '700' : '400'),
+                    color: isSelected ? '#3B82F6' : 'var(--map-label)',
                     whiteSpace: 'nowrap',
                     textShadow: station.isMajor 
                       ? '0 1px 3px rgba(0, 0, 0, 0.85), 0 0 2px rgba(0, 0, 0, 0.75)' 
@@ -137,6 +181,40 @@ function StationsLayer() {
             )}
           </CircleMarker>
         );
+
+        // Highlight ring for selected station
+        if (isSelected) {
+          stationElements.push(
+            <CircleMarker
+              key={`station-highlight-${station.name}`}
+              center={[station.lat, station.lng]}
+              radius={radius + 8}
+              pathOptions={{
+                fillColor: 'transparent',
+                fillOpacity: 0,
+                color: '#60A5FA',
+                weight: 3,
+                opacity: 0.6,
+                dashArray: '6, 6',
+              }}
+            />
+          );
+          stationElements.push(
+            <CircleMarker
+              key={`station-highlight-outer-${station.name}`}
+              center={[station.lat, station.lng]}
+              radius={radius + 12}
+              pathOptions={{
+                fillColor: 'transparent',
+                fillOpacity: 0,
+                color: '#3B82F6',
+                weight: 2,
+                opacity: 0.4,
+                dashArray: '8, 8',
+              }}
+            />
+          );
+        }
         
         return stationElements;
       }).flat()}

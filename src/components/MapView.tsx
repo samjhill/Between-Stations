@@ -13,9 +13,11 @@ import Filters from './Filters';
 import TrainDetails from './TrainDetails';
 import TrainTooltip from './TrainTooltip';
 import LineTooltip, { type LineTooltipStats } from './LineTooltip';
+import StationTrainsPanel from './StationTrainsPanel';
 import '../App.css';
 import { TRAIN_ROUTES } from '../config/trainRoutes';
 import { getLineColor } from '../config/lineColors';
+import { STATION_DATABASE } from '../core/stationMapping';
 
 // Center on New Jersey/New York area
 const DEFAULT_CENTER: [number, number] = [40.7178, -74.0431];
@@ -35,6 +37,7 @@ export default function MapView() {
   const [trains, setTrains] = useState<Train[]>([]);
   const [selectedTrainId, setSelectedTrainId] = useState<string | null>(null);
   const [selectedLineId, setSelectedLineId] = useState<string | null>(null);
+  const [selectedStationName, setSelectedStationName] = useState<string | null>(null);
   const [filterState, setFilterState] = useState<FilterState>({
     lines: [],
     directions: [],
@@ -49,6 +52,7 @@ export default function MapView() {
   const [mapZoom] = useState(DEFAULT_ZOOM);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [stationPanelOpen, setStationPanelOpen] = useState(false);
 
   // Initialize provider manager
   const [providerManager] = useState(() => {
@@ -217,6 +221,24 @@ export default function MapView() {
     setSelectedTrainId(null);
   }, []);
 
+  const handleStationClick = useCallback((stationName: string) => {
+    console.log('handleStationClick called with:', stationName);
+    if (selectedStationName === stationName) {
+      // Toggle off if clicking the same station
+      console.log('Toggling off station');
+      setSelectedStationName(null);
+      setStationPanelOpen(false);
+    } else {
+      console.log('Setting station and opening panel');
+      setSelectedStationName(stationName);
+      setStationPanelOpen(true);
+      // Clear other selections and close train list sidebar
+      setSelectedTrainId(null);
+      setSelectedLineId(null);
+      setSidebarOpen(false);
+    }
+  }, [selectedStationName]);
+
   const handleFollowTrain = useCallback((trainId: string | null) => {
     setFollowState({
       trainId,
@@ -257,6 +279,75 @@ export default function MapView() {
     if (!selectedTrainId) return null;
     return trains.find((t) => t.id === selectedTrainId) || null;
   }, [selectedTrainId, trains]);
+
+  // Helper function to normalize and match station names
+  const normalizeStationName = useCallback((name: string): string[] => {
+    const normalized = name.toLowerCase().trim();
+    const matches: string[] = [normalized];
+    
+    // Find station in database and add canonical name and aliases
+    const stationData = STATION_DATABASE.find(
+      (s) => s.name.toLowerCase() === normalized || 
+             s.aliases?.some(alias => alias.toLowerCase() === normalized)
+    );
+    
+    if (stationData) {
+      matches.push(stationData.name.toLowerCase());
+      if (stationData.aliases) {
+        stationData.aliases.forEach(alias => {
+          matches.push(alias.toLowerCase());
+        });
+      }
+    }
+    
+    return [...new Set(matches)]; // Remove duplicates
+  }, []);
+
+  // Filter trains arriving at the selected station
+  const trainsAtStation = useMemo(() => {
+    if (!selectedStationName) return [];
+    
+    const stationNameVariants = normalizeStationName(selectedStationName);
+    const matchesStation = (name: string | undefined): boolean => {
+      if (!name) return false;
+      const normalized = name.toLowerCase().trim();
+      return stationNameVariants.some(variant => normalized === variant || normalized.includes(variant) || variant.includes(normalized));
+    };
+    
+    return trains.filter((train) => {
+      // Train is arriving at this station (nextStop matches)
+      if (train.nextStop && matchesStation(train.nextStop)) {
+        return true;
+      }
+      // Train is currently at this station
+      if (train.state === 'at_station' && train.nextStop && matchesStation(train.nextStop)) {
+        return true;
+      }
+      // Check if train's route includes this station (for timetable-based predictions)
+      const routePosition = train.locationHypothesis?.routePosition;
+      if (routePosition) {
+        if (routePosition.fromStation && matchesStation(routePosition.fromStation)) {
+          return true;
+        }
+        if (routePosition.toStation && matchesStation(routePosition.toStation)) {
+          return true;
+        }
+      }
+      return false;
+    }).sort((a, b) => {
+      // Sort by nextStop timing if available, otherwise by line
+      const aMatches = a.nextStop && matchesStation(a.nextStop);
+      const bMatches = b.nextStop && matchesStation(b.nextStop);
+      
+      if (aMatches && bMatches) {
+        // Both are heading to this station, sort by delay/status
+        const aDelay = a.delaySeconds || 0;
+        const bDelay = b.delaySeconds || 0;
+        return aDelay - bDelay;
+      }
+      return a.line.localeCompare(b.line);
+    });
+  }, [trains, selectedStationName, normalizeStationName]);
 
   return (
     <div className="app">
@@ -305,10 +396,14 @@ export default function MapView() {
       
       <div className="app-content">
         {/* Sidebar backdrop */}
-        {sidebarOpen && (
+        {(sidebarOpen || stationPanelOpen) && (
           <div
-            className={`sidebar-backdrop ${sidebarOpen ? 'active' : ''}`}
-            onClick={() => setSidebarOpen(false)}
+            className={`sidebar-backdrop ${(sidebarOpen || stationPanelOpen) ? 'active' : ''}`}
+            onClick={() => {
+              setSidebarOpen(false);
+              setStationPanelOpen(false);
+              setSelectedStationName(null);
+            }}
           />
         )}
 
@@ -326,8 +421,10 @@ export default function MapView() {
               selectedTrain={selectedTrain}
               followState={followState}
               filterState={filterState}
+              selectedStationName={selectedStationName}
               onTrainClick={handleTrainClick}
               onLineClick={handleLineClick}
+              onStationClick={handleStationClick}
             />
           </MapContainer>
         </div>
@@ -365,6 +462,24 @@ export default function MapView() {
             )}
           </div>
         </div>
+
+        {/* Station trains panel */}
+        {stationPanelOpen && selectedStationName && (
+          <div className={`app-sidebar station-panel ${stationPanelOpen ? 'open' : ''}`}>
+            <StationTrainsPanel
+              stationName={selectedStationName}
+              trains={trainsAtStation}
+              selectedTrain={selectedTrain}
+              followState={followState}
+              onTrainClick={handleTrainClick}
+              onFollowTrain={handleFollowTrain}
+              onClose={() => {
+                setStationPanelOpen(false);
+                setSelectedStationName(null);
+              }}
+            />
+          </div>
+        )}
       </div>
 
       {/* Train count badge */}

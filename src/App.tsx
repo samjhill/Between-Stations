@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import { memo } from 'react';
 import MapView from './components/MapView';
 import About from './components/About';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import './App.css';
 
 const AppFooter = memo(function AppFooter() {
@@ -53,9 +54,11 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
