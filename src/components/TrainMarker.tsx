@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { Train } from '../types/domain';
@@ -108,6 +108,7 @@ export default function TrainMarker({
   const rawPosition = train.locationHypothesis?.position;
   const markerRef = useRef<L.Marker | null>(null);
   const map = useMap();
+  const [mapTick, setMapTick] = useState(0);
   const mapViewRef = useRef({ center: map.getCenter(), zoom: map.getZoom() });
 
   // Track map view changes (needed for pixel-based offsets) - throttled
@@ -117,6 +118,8 @@ export default function TrainMarker({
       if (rafId === null) {
         rafId = requestAnimationFrame(() => {
           mapViewRef.current = { center: map.getCenter(), zoom: map.getZoom() };
+          // Force recompute of pixel-based snapping so trains stay on the stacked lines.
+          setMapTick((t) => t + 1);
           rafId = null;
         });
       }
@@ -125,6 +128,7 @@ export default function TrainMarker({
     map.on('moveend', updateView);
     map.on('zoomend', updateView);
     map.on('viewreset', updateView);
+    map.on('resize', updateView);
 
     return () => {
       if (rafId !== null) {
@@ -133,12 +137,16 @@ export default function TrainMarker({
       map.off('moveend', updateView);
       map.off('zoomend', updateView);
       map.off('viewreset', updateView);
+      map.off('resize', updateView);
     };
   }, [map]);
 
   // Snap train position to its line (accounting for corridor offsets)
   // Only recalculate when position or line changes, not on every map move
   const snappedPosition = useMemo(() => {
+    // Dependency used to recompute snapping on pan/zoom (corridor offset math depends on map transform).
+    void mapTick;
+
     if (!rawPosition) return null;
     
     try {
@@ -147,7 +155,7 @@ export default function TrainMarker({
       console.warn(`Failed to snap train ${train.id} to line ${train.line}:`, error);
       return rawPosition; // Fallback to raw position
     }
-  }, [rawPosition, train.line, train.id, map]);
+  }, [rawPosition, train.line, train.id, map, mapTick]);
 
   // Calculate direction angle for the train
   const directionAngle = useMemo(() => {

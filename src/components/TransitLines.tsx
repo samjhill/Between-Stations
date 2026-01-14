@@ -1,9 +1,10 @@
-import { useMemo, memo } from 'react';
-import { Polyline } from 'react-leaflet';
+import { useMemo, memo, useState } from 'react';
+import { Polyline, useMapEvents } from 'react-leaflet';
 import { getLineColor, LINE_COLORS } from '../config/lineColors';
 import type { FilterState } from '../types/ui';
 import { getRouteCoordinates } from '../config/trainRoutes';
 import type { LeafletMouseEvent, PolylineOptions } from 'leaflet';
+import { applyCorridorOffsets, detectCorridorsFromLines } from '../core/corridorStacking';
 
 interface TransitLinesProps {
   filterState?: FilterState;
@@ -15,6 +16,13 @@ interface TransitLinesProps {
  * Uses official NJ Transit route sequences
  */
 function TransitLines({ filterState, onLineClick }: TransitLinesProps) {
+  const [mapTick, setMapTick] = useState(0);
+  const map = useMapEvents({
+    moveend: () => setMapTick((t) => t + 1),
+    zoomend: () => setMapTick((t) => t + 1),
+    resize: () => setMapTick((t) => t + 1),
+  });
+
   // Get all lines from LINE_COLORS
   const allLines = Object.keys(LINE_COLORS);
   
@@ -23,8 +31,19 @@ function TransitLines({ filterState, onLineClick }: TransitLinesProps) {
     ? allLines.filter(line => filterState.lines.includes(line))
     : allLines;
 
+  // Detect shared corridors once from the official, un-offset routes (map-independent).
+  const corridors = useMemo(() => {
+    const baseLines = allLines
+      .map((lineName) => ({ name: lineName, stations: getRouteCoordinates(lineName) }))
+      .filter((l) => l.stations.length > 0);
+    return detectCorridorsFromLines(baseLines);
+  }, [allLines]);
+
   // Build line data using official routes
   const linesToRender = useMemo(() => {
+    // Dependency used to recompute offsets on pan/zoom (screen-pixel spacing).
+    void mapTick;
+
     return visibleLines
       .map((lineName) => {
         const route = getRouteCoordinates(lineName);
@@ -33,12 +52,14 @@ function TransitLines({ filterState, onLineClick }: TransitLinesProps) {
         }
         return {
           name: lineName,
-          stations: route,
+          // Spread overlapping corridor segments into parallel lines (transit-map style).
+          // Recomputed on pan/zoom so spacing stays constant in screen pixels.
+          stations: applyCorridorOffsets(lineName, route, corridors, map),
           color: getLineColor(lineName),
         };
       })
       .filter((line): line is NonNullable<typeof line> => line !== null);
-  }, [visibleLines]);
+  }, [visibleLines, corridors, map, mapTick]);
 
   return (
     <>
