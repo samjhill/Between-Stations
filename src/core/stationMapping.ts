@@ -183,7 +183,8 @@ export const STATION_DATABASE: StationData[] = [
   { id: 'NTH', name: 'Netherwood', position: { lat: 40.6480, lng: -74.3400 }, aliases: ['NetherwoodL'] },
   { id: 'FAN', name: 'Fanwood', position: { lat: 40.6410, lng: -74.3830 }, aliases: ['FanwoodL'] },
   { id: 'BBK', name: 'Bound Brook', position: { lat: 40.5680, lng: -74.5310 }, aliases: ['Bound BrookL', 'Bound Brook6.508.06'] },
-  { id: 'UN', name: 'Union Station', position: { lat: 40.6250, lng: -74.4000 }, aliases: ['Union StationL', 'Union Station6.147.30'] },
+  // Coordinates: https://en.wikipedia.org/wiki/Union_station_(NJ_Transit)
+  { id: 'UN', name: 'Union Station', position: { lat: 40.68333, lng: -74.23861 }, aliases: ['Union StationL', 'Union Station6.147.30'] },
   { id: 'RAR', name: 'Raritan', position: { lat: 40.5690, lng: -74.6330 }, aliases: ['RARITAN', 'RARITANL'] },
   { id: 'BRW', name: 'Bridgewater', position: { lat: 40.5900, lng: -74.5880 }, aliases: ['BridgewaterL'] },
   { id: 'SOM', name: 'Somerville', position: { lat: 40.5740, lng: -74.6100 }, aliases: ['SomervilleL'] },
