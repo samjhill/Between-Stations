@@ -234,9 +234,11 @@ export default function TrainMarker({
           <p style={{ margin: '4px 0', fontSize: '0.9rem' }}>
             <strong>Direction:</strong> {train.direction}
           </p>
-          <p style={{ margin: '4px 0', fontSize: '0.9rem' }}>
-            <strong>To:</strong> {train.destination}
-          </p>
+          {train.destination && train.destination !== 'unknown' && (
+            <p style={{ margin: '4px 0', fontSize: '0.9rem' }}>
+              <strong>To:</strong> {train.destination}
+            </p>
+          )}
           {train.delaySeconds !== undefined && train.delaySeconds > 0 && (
             <p style={{ margin: '4px 0', color: '#dc3545', fontSize: '0.9rem' }}>
               <strong>Delay:</strong> {Math.floor(train.delaySeconds / 60)} min{' '}

@@ -96,7 +96,9 @@ function TrainList({
                 <div className="train-list-item-details">
                   <div className="train-line">{train.line}</div>
                   <div className="train-direction">
-                    {train.direction} → {train.destination}
+                    {train.destination && train.destination !== 'unknown'
+                      ? `${train.direction} → ${train.destination}`
+                      : train.direction}
                   </div>
                   {train.delaySeconds !== undefined && train.delaySeconds > 0 && (
                     <div className="train-delay">

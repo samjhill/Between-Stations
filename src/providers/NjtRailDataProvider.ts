@@ -9,6 +9,7 @@
 
 import { BaseProvider } from '../core/Provider';
 import type { ProviderObservation, ProviderTrainData } from '../types/domain';
+import { mapStationName } from '../core/stationMapping';
 
 type BackendVehicleRow = {
   ID: string;
@@ -26,6 +27,8 @@ type BackendVehicleRow = {
 type BackendVehicleResponse = {
   source: string;
   timestamp: number;
+  fetchedAt?: number;
+  upstreamLastModifiedMs?: number | null;
   trains: BackendVehicleRow[];
 };
 
@@ -75,6 +78,10 @@ function normalizeNextStop(v?: string): string | undefined {
   const raw = v.trim();
   if (!raw) return undefined;
 
+  // Prefer mapping to our canonical station names for consistent display/search.
+  const mapped = mapStationName(raw);
+  if (mapped) return mapped.name;
+
   // Common abbreviations observed in NJT responses
   const key = raw.toLowerCase();
   const map: Record<string, string> = {
@@ -85,6 +92,11 @@ function normalizeNextStop(v?: string): string | undefined {
   };
 
   return map[key] || raw;
+}
+
+function isPlausibleLatLng(lat: number, lng: number): boolean {
+  // Rough bounding box around NJ/NYC/nearby areas
+  return lat >= 38.0 && lat <= 42.5 && lng >= -76.5 && lng <= -72.0;
 }
 
 export class NjtRailDataProvider extends BaseProvider {
@@ -108,6 +120,8 @@ export class NjtRailDataProvider extends BaseProvider {
         .map((row) => {
           const lat = parseNumberLike(row.LATITUDE);
           const lng = parseNumberLike(row.LONGITUDE);
+          const hasCoords =
+            lat != null && lng != null && isPlausibleLatLng(lat, lng);
 
           return {
             trainNumber: row.ID,
@@ -116,7 +130,7 @@ export class NjtRailDataProvider extends BaseProvider {
             // getVehicleData does not include a true "destination" field; keep undefined so the
             // UI doesn't misrepresent it. (Next stop is shown separately.)
             destination: undefined,
-            position: lat != null && lng != null ? { lat, lng } : undefined,
+            position: hasCoords ? { lat: lat!, lng: lng! } : undefined,
             nextStop: normalizeNextStop(row.NEXT_STOP),
             delaySeconds: parseDelaySeconds(row.SEC_LATE),
             rawData: row,

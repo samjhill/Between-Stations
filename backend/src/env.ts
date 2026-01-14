@@ -47,6 +47,7 @@ export const env = {
   PORT: readInt('PORT', 8787),
   NODE_ENV: readOptional('NODE_ENV', 'development'),
   CORS_ORIGIN: readOptional('CORS_ORIGIN', 'http://localhost:5173'),
+  CORS_ORIGINS: readOptional('CORS_ORIGINS', ''),
 
   // NJ TRANSIT Rail Data API credentials
   NJT_ENV: readNjtEnv('NJT_ENV', 'test'),
@@ -55,8 +56,17 @@ export const env = {
 
   // Behavior
   UPSTREAM_TIMEOUT_MS: readInt('UPSTREAM_TIMEOUT_MS', 10_000),
+  UPSTREAM_MAX_RETRIES: readInt('UPSTREAM_MAX_RETRIES', 1),
   VEHICLE_CACHE_TTL_MS: readInt('VEHICLE_CACHE_TTL_MS', 15_000),
   USER_AGENT: readOptional('USER_AGENT', 'nj-transit-realtime-map/1.0'),
+
+  // Abuse protection
+  RATE_LIMIT_WINDOW_MS: readInt('RATE_LIMIT_WINDOW_MS', 60_000),
+  RATE_LIMIT_MAX: readInt('RATE_LIMIT_MAX', 120),
+  BACKEND_API_KEY: readOptional('BACKEND_API_KEY', ''),
+
+  // Persistence
+  TOKEN_STATE_DIR: readOptional('TOKEN_STATE_DIR', 'backend/.state'),
 
   // Logging
   LOG_LEVEL: readLogLevel('LOG_LEVEL', 'info'),

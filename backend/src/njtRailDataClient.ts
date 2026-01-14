@@ -1,4 +1,6 @@
+import path from 'node:path';
 import { env, getRailDataApiBaseUrl } from './env';
+import { TokenStateStore } from './tokenStateStore';
 
 type JsonValue = null | boolean | number | string | JsonValue[] | { [k: string]: JsonValue };
 
@@ -51,39 +53,93 @@ export class NjtRailDataClient {
   private tokenFetchAttemptsDay: string | null = null;
   private tokenFetchAttempts = 0;
   private tokenBackoffUntilMs = 0;
+  private readonly store: TokenStateStore;
 
-  constructor(private readonly baseUrl = getRailDataApiBaseUrl()) {}
+  constructor(private readonly baseUrl = getRailDataApiBaseUrl()) {
+    const file = path.join(env.TOKEN_STATE_DIR, `njt-token-${env.NJT_ENV}.json`);
+    this.store = new TokenStateStore(file);
 
-  private async postForm(path: string, fields: Record<string, string>): Promise<unknown> {
-    const url = `${this.baseUrl}${path}`;
+    const saved = this.store.load();
+    if (saved) {
+      this.token = saved.token;
+      this.tokenCheckedDay = saved.tokenCheckedDay;
+      this.tokenFetchAttemptsDay = saved.tokenFetchAttemptsDay;
+      this.tokenFetchAttempts = saved.tokenFetchAttempts;
+      this.tokenBackoffUntilMs = saved.tokenBackoffUntilMs;
+    }
+  }
+
+  getDebugState(): {
+    tokenPresent: boolean;
+    tokenCheckedDay: string | null;
+    tokenFetchAttemptsDay: string | null;
+    tokenFetchAttempts: number;
+    tokenBackoffUntilMs: number;
+  } {
+    return {
+      tokenPresent: Boolean(this.token),
+      tokenCheckedDay: this.tokenCheckedDay,
+      tokenFetchAttemptsDay: this.tokenFetchAttemptsDay,
+      tokenFetchAttempts: this.tokenFetchAttempts,
+      tokenBackoffUntilMs: this.tokenBackoffUntilMs,
+    };
+  }
+
+  private persist(): void {
+    this.store.save({
+      token: this.token,
+      tokenCheckedDay: this.tokenCheckedDay,
+      tokenFetchAttemptsDay: this.tokenFetchAttemptsDay,
+      tokenFetchAttempts: this.tokenFetchAttempts,
+      tokenBackoffUntilMs: this.tokenBackoffUntilMs,
+    });
+  }
+
+  private async postForm(endpointPath: string, fields: Record<string, string>): Promise<unknown> {
+    const url = `${this.baseUrl}${endpointPath}`;
 
     const form = new FormData();
     for (const [k, v] of Object.entries(fields)) {
       form.append(k, v);
     }
 
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), env.UPSTREAM_TIMEOUT_MS);
-    try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          accept: 'text/plain',
-          'user-agent': env.USER_AGENT,
-        },
-        body: form,
-        signal: controller.signal,
-      });
+    let lastError: unknown = null;
+    const attempts = Math.max(1, env.UPSTREAM_MAX_RETRIES + 1);
 
-      const text = await res.text();
-      if (!text) return null;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), env.UPSTREAM_TIMEOUT_MS);
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {
+            accept: 'text/plain',
+            'user-agent': env.USER_AGENT,
+          },
+          body: form,
+          signal: controller.signal,
+        });
 
-      // The API returns JSON-like responses but content-type is often text/plain
-      const parsed = safeJsonParse(text);
-      return parsed ?? text;
-    } finally {
-      clearTimeout(timer);
+        const text = await res.text();
+        if (!text) return null;
+
+        // The API returns JSON-like responses but content-type is often text/plain
+        const parsed = safeJsonParse(text);
+        return parsed ?? text;
+      } catch (e) {
+        lastError = e;
+        // Only retry on network/timeout-ish failures
+        if (attempt < attempts) {
+          await new Promise((r) => setTimeout(r, 250 * attempt));
+          continue;
+        }
+      } finally {
+        clearTimeout(timer);
+      }
+      break;
     }
+
+    throw lastError instanceof Error ? lastError : new Error(String(lastError));
   }
 
   private async getToken(): Promise<string | null> {
@@ -96,6 +152,7 @@ export class NjtRailDataClient {
       this.tokenFetchAttemptsDay = day;
       this.tokenFetchAttempts = 0;
       this.tokenBackoffUntilMs = 0;
+      this.persist();
     }
 
     if (Date.now() < this.tokenBackoffUntilMs) {
@@ -108,6 +165,7 @@ export class NjtRailDataClient {
     }
 
     this.tokenFetchAttempts += 1;
+    this.persist();
 
     const raw = await this.postForm('/api/TrainData/getToken', {
       username: env.NJT_USERNAME,
@@ -128,6 +186,7 @@ export class NjtRailDataClient {
 
     // Auth failed: back off a bit to avoid hammering the daily limit in a tight loop.
     this.tokenBackoffUntilMs = Date.now() + 60_000;
+    this.persist();
     if (tr && tr.Authenticated === 'False') {
       throw new Error('[njt] getToken rejected credentials (Authenticated=False)');
     }
@@ -143,6 +202,7 @@ export class NjtRailDataClient {
 
     const raw = await this.postForm('/api/TrainData/isValidToken', { token });
     this.tokenCheckedDay = day;
+    this.persist();
 
     if (raw === null) return false;
     if (!isObject(raw)) return false;
@@ -161,11 +221,13 @@ export class NjtRailDataClient {
       const ok = await this.isValidToken(this.token);
       if (ok) return this.token;
       this.token = null;
+      this.persist();
     }
 
     const token = await this.getToken();
     if (!token) throw new Error('[njt] Failed to obtain token');
     this.token = token;
+    this.persist();
     return token;
   }
 
@@ -184,6 +246,7 @@ export class NjtRailDataClient {
       // Invalid token is the common case; clear + retry once
       if (raw.errorMessage.toLowerCase().includes('invalid token')) {
         this.token = null;
+        this.persist();
         const token2 = await this.ensureToken();
         const raw2 = await this.postForm('/api/TrainData/getVehicleData', { token: token2 });
         if (Array.isArray(raw2)) return raw2 as unknown as NjtVehicleDataRow[];

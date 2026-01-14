@@ -275,12 +275,14 @@ export function mergeObservations(
 
       // Determine evidence type
       let evidenceType: Evidence['type'] = 'prediction';
-      if (trainData.position) {
+      // Timetable-derived positions are schedule evidence even if they contain lat/lng.
+      // This prevents schedule-based interpolation from being treated as high-confidence GPS.
+      if (observation.provider === 'timetable' || trainData.rawData.source === 'timetable') {
+        evidenceType = 'schedule';
+      } else if (trainData.position) {
         evidenceType = 'direct_position';
       } else if (trainData.station) {
         evidenceType = 'station_sighting';
-      } else if (observation.provider === 'timetable' || trainData.rawData.source === 'timetable') {
-        evidenceType = 'schedule';
       }
 
       const evidence: Evidence = {
