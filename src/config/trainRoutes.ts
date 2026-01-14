@@ -127,8 +127,8 @@ export const TRAIN_ROUTES: Record<string, string[]> = {
     'Upper Montclair',
     'Montclair Heights',
     'Mountain Avenue',
-    'Little Falls',
     'Montclair State University',
+    'Little Falls',
     'Wayne/Route 23',
     'Mountain View',
     'Lincoln Park',
@@ -245,12 +245,17 @@ export function getRouteCoordinates(lineId: string): Array<[number, number]> {
     return [];
   }
 
+  const seen = new Set<string>();
   const coordinates: Array<[number, number]> = [];
 
   stationNames.forEach(stationName => {
     const mapped = mapStationName(stationName, lineId);
     if (mapped) {
-      coordinates.push([mapped.position.lat, mapped.position.lng]);
+      const key = `${mapped.position.lat.toFixed(6)},${mapped.position.lng.toFixed(6)}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        coordinates.push([mapped.position.lat, mapped.position.lng]);
+      }
     }
   });
 

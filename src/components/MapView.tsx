@@ -12,15 +12,29 @@ import TrainList from './TrainList';
 import Filters from './Filters';
 import TrainDetails from './TrainDetails';
 import TrainTooltip from './TrainTooltip';
+import LineTooltip, { type LineTooltipStats } from './LineTooltip';
 import '../App.css';
+import { TRAIN_ROUTES } from '../config/trainRoutes';
+import { getLineColor } from '../config/lineColors';
 
 // Center on New Jersey/New York area
 const DEFAULT_CENTER: [number, number] = [40.7178, -74.0431];
 const DEFAULT_ZOOM = 10;
 
+type ProviderMode = 'realtime' | 'hybrid' | 'timetable';
+
+function getProviderMode(): ProviderMode {
+  const raw = (import.meta.env.VITE_PROVIDER_MODE || '').toString().trim().toLowerCase();
+  if (raw === 'realtime' || raw === 'hybrid' || raw === 'timetable') return raw;
+  // Default to realtime so testing uses only true API locations (no schedule-extrapolated positions).
+  return 'realtime';
+}
+
 export default function MapView() {
+  const providerMode = getProviderMode();
   const [trains, setTrains] = useState<Train[]>([]);
   const [selectedTrain, setSelectedTrain] = useState<Train | null>(null);
+  const [selectedLineId, setSelectedLineId] = useState<string | null>(null);
   const [filterState, setFilterState] = useState<FilterState>({
     lines: [],
     directions: [],
@@ -31,22 +45,26 @@ export default function MapView() {
     trainId: null,
     enabled: false,
   });
-  const [mapCenter, setMapCenter] = useState<[number, number]>(DEFAULT_CENTER);
-  const [mapZoom, setMapZoom] = useState(DEFAULT_ZOOM);
+  const [mapCenter] = useState<[number, number]>(DEFAULT_CENTER);
+  const [mapZoom] = useState(DEFAULT_ZOOM);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Initialize provider manager
   const [providerManager] = useState(() => {
     const manager = new ProviderManager();
-    // Register timetable provider (schedule-based position extrapolation)
-    const timetableProvider = new TimetableProvider();
-    manager.register(timetableProvider);
+    if (providerMode === 'timetable' || providerMode === 'hybrid') {
+      // Register timetable provider (schedule-based position extrapolation)
+      const timetableProvider = new TimetableProvider();
+      manager.register(timetableProvider);
+    }
 
-    // Register realtime provider (via backend proxy). If backend isn't running, this provider will
-    // mark itself unavailable and the app will fall back to the timetable provider.
-    const realtimeProvider = new NjtRailDataProvider();
-    manager.register(realtimeProvider);
+    if (providerMode === 'realtime' || providerMode === 'hybrid') {
+      // Register realtime provider (via backend proxy).
+      const realtimeProvider = new NjtRailDataProvider();
+      manager.register(realtimeProvider);
+    }
+
     return manager;
   });
 
@@ -109,7 +127,14 @@ export default function MapView() {
 
   const handleTrainClick = useCallback((train: Train) => {
     setSelectedTrain(train);
+    setSelectedLineId(null);
     // Don't open sidebar - tooltip will show instead
+  }, []);
+
+  const handleLineClick = useCallback((lineId: string, clickLatLng: { lat: number; lng: number }) => {
+    void clickLatLng;
+    setSelectedLineId(lineId);
+    setSelectedTrain(null);
   }, []);
 
   const handleFollowTrain = useCallback((trainId: string | null) => {
@@ -118,6 +143,35 @@ export default function MapView() {
       enabled: trainId !== null,
     });
   }, []);
+
+  const selectedLineStats: LineTooltipStats | null = useMemo(() => {
+    if (!selectedLineId) return null;
+
+    const stations = TRAIN_ROUTES[selectedLineId] || [];
+    const color = getLineColor(selectedLineId);
+
+    const totalOnLine = trains.filter((t) => t.line === selectedLineId);
+    const visibleOnLine = filteredTrains.filter((t) => t.line === selectedLineId);
+
+    const countDirections = (list: Train[]) => {
+      const counts: Record<string, number> = {};
+      for (const t of list) {
+        const key = (t.direction || 'Unknown').toString();
+        counts[key] = (counts[key] || 0) + 1;
+      }
+      return counts;
+    };
+
+    return {
+      lineId: selectedLineId,
+      color,
+      stations,
+      totalTrains: totalOnLine.length,
+      visibleTrains: visibleOnLine.length,
+      directionCountsTotal: countDirections(totalOnLine),
+      directionCountsVisible: countDirections(visibleOnLine),
+    };
+  }, [selectedLineId, trains, filteredTrains]);
 
   return (
     <div className="app">
@@ -188,7 +242,7 @@ export default function MapView() {
               followState={followState}
               filterState={filterState}
               onTrainClick={handleTrainClick}
-              onFollowTrain={handleFollowTrain}
+              onLineClick={handleLineClick}
             />
           </MapContainer>
         </div>
@@ -218,7 +272,7 @@ export default function MapView() {
               }}
               onFollowTrain={handleFollowTrain}
             />
-            {selectedTrain && (
+            {sidebarOpen && selectedTrain && (
               <TrainDetails
                 train={selectedTrain}
                 onClose={() => setSelectedTrain(null)}
@@ -238,13 +292,21 @@ export default function MapView() {
       )}
 
       {/* Train tooltip - floating popup */}
-      {selectedTrain && selectedTrain.locationHypothesis?.position && (
+      {!sidebarOpen && selectedTrain && selectedTrain.locationHypothesis?.position && (
         <TrainTooltip
           train={selectedTrain}
           position={selectedTrain.locationHypothesis.position}
           onClose={() => setSelectedTrain(null)}
           onFollow={(trainId) => handleFollowTrain(trainId)}
           isFollowing={followState.enabled && followState.trainId === selectedTrain.id}
+        />
+      )}
+
+      {/* Line tooltip - floating popup */}
+      {selectedLineStats && (
+        <LineTooltip
+          stats={selectedLineStats}
+          onClose={() => setSelectedLineId(null)}
         />
       )}
     </div>

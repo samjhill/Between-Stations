@@ -32,11 +32,34 @@ The app combines evidence from multiple sources (schedules, station arrivals, GP
 # Install dependencies
 npm install
 
-# Start the development server
+# Start the backend proxy (required for realtime train locations)
+npm run backend:dev
+
+# In another terminal, start the frontend dev server
 npm run dev
 
 # Open http://localhost:5173 in your browser
 ```
+
+### Realtime-only testing (no timetable extrapolation)
+
+By default, the app is configured for **realtime-only** train locations (so you can validate the NJT API integration without schedule-based “fallback” trains).
+
+Set in a local Vite env file:
+
+```bash
+echo "VITE_PROVIDER_MODE=realtime" > .env.local
+```
+
+Other modes:
+- `VITE_PROVIDER_MODE=hybrid`: realtime + timetable schedule extrapolation fallback
+- `VITE_PROVIDER_MODE=timetable`: timetable schedule extrapolation only
+
+### Backend credentials
+
+The realtime train locations come from the NJ TRANSIT Rail Data API via the backend proxy in `backend/`.
+
+See `backend/README.md` for setting `backend/.env` (including `NJT_USERNAME` / `NJT_PASSWORD`).
 
 ## Building for production
 

@@ -1,11 +1,31 @@
 import { useEffect, useState } from 'react';
 import { GeoJSON } from 'react-leaflet';
-import type { GeoJsonObject } from 'geojson';
+import type { FeatureCollection } from 'geojson';
+import type { Layer, LeafletMouseEvent } from 'leaflet';
 import './StateBoundaries.css';
+
+function isObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null;
+}
+
+function getPropString(obj: unknown, key: string): string {
+  if (!isObject(obj)) return '';
+  const v = obj[key];
+  return typeof v === 'string' ? v : '';
+}
+
+function getFeatureStateName(feature: unknown): string {
+  if (!isObject(feature)) return '';
+  const props = feature.properties;
+  const state = getPropString(props, 'state');
+  const name = getPropString(props, 'name');
+  const NAME = getPropString(props, 'NAME');
+  return state || name || NAME || '';
+}
 
 // Accurate state boundaries using real geographic coordinates
 // Based on actual state border coordinates for NJ and NY
-const getStateBoundaries = (): GeoJsonObject => {
+const getStateBoundaries = (): FeatureCollection => {
   // New Jersey boundary - using actual state border coordinates
   // Simplified but accurate representation of NJ's distinctive shape
   const njBoundary: [number, number][] = [
@@ -132,7 +152,7 @@ const getStateBoundaries = (): GeoJsonObject => {
  * for New Jersey and New York to provide geographic context
  */
 export default function StateBoundaries() {
-  const [boundaries, setBoundaries] = useState<GeoJsonObject | null>(null);
+  const [boundaries, setBoundaries] = useState<FeatureCollection | null>(null);
 
   useEffect(() => {
     // Try to fetch from public API, fallback to local data
@@ -159,10 +179,10 @@ export default function StateBoundaries() {
               }
               
               // Filter for NJ and NY only, or use all if it's a single state
-              const filtered = {
+              const filtered: FeatureCollection = {
                 type: 'FeatureCollection',
-                features: features.filter((f: any) => {
-                  const name = f.properties?.name || f.properties?.NAME || '';
+                features: features.filter((f: unknown) => {
+                  const name = getFeatureStateName(f);
                   return name.includes('New Jersey') || name.includes('New York') || 
                          name === 'NJ' || name === 'NY' ||
                          features.length <= 2; // If only 1-2 features, use them all
@@ -170,7 +190,7 @@ export default function StateBoundaries() {
               };
               
               if (filtered.features.length > 0) {
-                setBoundaries(filtered as GeoJsonObject);
+                setBoundaries(filtered);
                 success = true;
                 break;
               }
@@ -185,9 +205,8 @@ export default function StateBoundaries() {
           throw new Error('All API sources failed');
         }
       } catch (error) {
-        // Don't show boundaries if we can't fetch accurate data
-        console.log('Could not fetch accurate state boundaries');
-        setBoundaries(null);
+        // Fall back to our local approximation if network fetch fails.
+        setBoundaries(getStateBoundaries() as FeatureCollection);
       }
     };
 
@@ -199,11 +218,10 @@ export default function StateBoundaries() {
   }
 
   // Style function for each state
-  const styleFeature = (feature: any) => {
+  const styleFeature = (feature: unknown) => {
     // Support both 'state' property (local) and 'name' property (API)
-    const stateName = feature?.properties?.state || feature?.properties?.name || '';
+    const stateName = getFeatureStateName(feature);
     const isNJ = stateName === 'New Jersey' || stateName === 'NJ';
-    const isNY = stateName === 'New York' || stateName === 'NY';
     
     return {
       fillColor: isNJ
@@ -222,13 +240,13 @@ export default function StateBoundaries() {
   };
 
   // Add hover effect
-  const onEachFeature = (feature: any, layer: any) => {
-    const stateName = feature?.properties?.state || feature?.properties?.name || '';
+  const onEachFeature = (feature: unknown, layer: Layer) => {
+    const stateName = getFeatureStateName(feature);
     const isNJ = stateName === 'New Jersey' || stateName === 'NJ';
     
     layer.on({
-      mouseover: (e: any) => {
-        e.target.setStyle({
+      mouseover: (e: LeafletMouseEvent) => {
+        (e.target as unknown as { setStyle: (s: Record<string, unknown>) => void }).setStyle({
           fillColor: isNJ
             ? 'rgba(44, 62, 80, 0.06)'
             : 'rgba(44, 62, 80, 0.04)',
@@ -238,8 +256,8 @@ export default function StateBoundaries() {
           weight: isNJ ? 3 : 2.5,
         });
       },
-      mouseout: (e: any) => {
-        e.target.setStyle({
+      mouseout: (e: LeafletMouseEvent) => {
+        (e.target as unknown as { setStyle: (s: Record<string, unknown>) => void }).setStyle({
           fillColor: isNJ
             ? 'rgba(44, 62, 80, 0.03)'
             : 'rgba(44, 62, 80, 0.02)',

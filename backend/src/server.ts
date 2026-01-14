@@ -10,6 +10,16 @@ const client = new NjtRailDataClient();
 type CacheEntry<T> = { value: T; expiresAt: number };
 let vehicleCache: CacheEntry<unknown> | null = null;
 
+function isObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null;
+}
+
+function getFetchedAtMs(v: unknown): number | null {
+  if (!isObject(v)) return null;
+  const fetchedAt = v.fetchedAt;
+  return typeof fetchedAt === 'number' ? fetchedAt : null;
+}
+
 function parseNjtLastModifiedMs(s: string | undefined): number | null {
   if (!s) return null;
   // Example: "13-Jan-2026 09:51:08 PM"
@@ -194,10 +204,8 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === 'GET' && url.pathname === '/health') {
       const now = Date.now();
-      const cacheAgeMs =
-        vehicleCache && typeof (vehicleCache.value as any)?.fetchedAt === 'number'
-          ? now - (vehicleCache.value as any).fetchedAt
-          : null;
+      const fetchedAt = vehicleCache ? getFetchedAtMs(vehicleCache.value) : null;
+      const cacheAgeMs = fetchedAt != null ? now - fetchedAt : null;
 
       return json(req, res, 200, {
         ok: true,
@@ -272,7 +280,6 @@ const server = http.createServer(async (req, res) => {
     return notFound(req, res);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
-    // eslint-disable-next-line no-console
     console.log(
       JSON.stringify({
         level: 'error',
@@ -284,7 +291,6 @@ const server = http.createServer(async (req, res) => {
     );
     return error(req, res, 502, 'UPSTREAM_ERROR', message);
   } finally {
-    // eslint-disable-next-line no-console
     console.log(
       JSON.stringify({
         level: 'info',
@@ -298,7 +304,6 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(env.PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(
     `[backend] listening on http://localhost:${env.PORT} (NJT_ENV=${env.NJT_ENV})`
   );

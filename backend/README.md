@@ -34,3 +34,8 @@ npm run dev
 
 Vite is configured to proxy `/api/*` to the backend on `http://localhost:8787`.
 
+## Testing notes
+
+- If you only want to see trains with **true realtime locations** (no schedule-based extrapolation), set `VITE_PROVIDER_MODE=realtime` in the frontend (see root `README.md`).
+- If the backend is not running or credentials are missing/invalid, the `/api/realtime/vehicles` endpoint will fail and the frontend will show no realtime trains.
+

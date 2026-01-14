@@ -7,12 +7,6 @@ type NjtEnv = 'test' | 'prod';
 import { loadDotenv } from './dotenv';
 loadDotenv();
 
-function readRequired(name: string): string {
-  const v = process.env[name];
-  if (!v) throw new Error(`[env] Missing required env var: ${name}`);
-  return v;
-}
-
 function readOptional(name: string, fallback = ''): string {
   const v = process.env[name];
   return v ?? fallback;

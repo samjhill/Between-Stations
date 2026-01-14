@@ -152,6 +152,14 @@ export const STATION_DATABASE: StationData[] = [
   { id: 'RUT', name: 'Rutherford', position: { lat: 40.8260, lng: -74.1070 } },
   { id: 'LYD', name: 'Lyndhurst', position: { lat: 40.8120, lng: -74.1250 } },
   { id: 'DEL', name: 'Delawanna', position: { lat: 40.8000, lng: -74.1300 } },
+  // Main/Bergen additional infill stations (east end)
+  // Coordinates sourced from each station's Wikipedia article.
+  // - Allendale station (NJ Transit): https://en.wikipedia.org/wiki/Allendale_station_(NJ_Transit)
+  // - Kingsland station (NJ Transit): https://en.wikipedia.org/wiki/Kingsland_station_(NJ_Transit)
+  // - Wood-Ridge station: https://en.wikipedia.org/wiki/Wood-Ridge_station
+  { id: 'AZ', name: 'Allendale', position: { lat: 41.0309, lng: -74.1311 } },
+  { id: 'KG', name: 'Kingsland', position: { lat: 40.8101, lng: -74.1172 } },
+  { id: 'WR', name: 'Wood Ridge', position: { lat: 40.8437, lng: -74.0789 } },
   { id: 'PAS', name: 'Passaic', position: { lat: 40.8570, lng: -74.1280 } },
   { id: 'CLI', name: 'Clifton', position: { lat: 40.8780, lng: -74.1640 } },
   { id: 'PAT', name: 'Paterson', position: { lat: 40.9150, lng: -74.1710 } },

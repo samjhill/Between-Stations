@@ -1,4 +1,4 @@
-import { useEffect, memo, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import TrainMarker from './TrainMarker';
 import TransitLines from './TransitLines';
 import StationsLayer from './StationsLayer';
@@ -14,7 +14,7 @@ interface MapContentProps {
   followState: FollowState;
   filterState: FilterState;
   onTrainClick: (train: Train) => void;
-  onFollowTrain: (trainId: string | null) => void;
+  onLineClick: (lineId: string, clickLatLng: { lat: number; lng: number }) => void;
 }
 
 function MapContent({
@@ -23,7 +23,7 @@ function MapContent({
   followState,
   filterState,
   onTrainClick,
-  onFollowTrain,
+  onLineClick,
 }: MapContentProps) {
   // Use camera controller hook
   const { cameraState, resetView, confidenceWarning } = useCameraController({
@@ -41,7 +41,7 @@ function MapContent({
     <>
       {/* Static layers: state boundaries, lines and stations */}
       <StateBoundaries />
-      <TransitLines filterState={filterState} />
+      <TransitLines filterState={filterState} onLineClick={onLineClick} />
       <StationsLayer />
       
       {/* Animated layer: trains */}
@@ -53,8 +53,6 @@ function MapContent({
             train={train}
             isSelected={isSelected}
             onTrainClick={onTrainClick}
-            onFollowTrain={onFollowTrain}
-            followState={followState}
           />
         );
       })}

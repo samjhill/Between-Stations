@@ -5,12 +5,10 @@
 
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { useMap } from 'react-leaflet';
-import type { Map } from 'leaflet';
 import {
   CameraController,
   type CameraMode,
   type CameraState,
-  easeInOut,
 } from '../core/cameraController';
 import type { Train } from '../types/domain';
 
@@ -125,7 +123,6 @@ export function useCameraController({
 
   // Main camera update loop - throttled to reduce CPU usage
   useEffect(() => {
-    let lastTime = performance.now();
     let lastUpdateTime = 0;
     const UPDATE_INTERVAL = 100; // Update every 100ms instead of every frame
 
@@ -136,9 +133,6 @@ export function useCameraController({
         return;
       }
       lastUpdateTime = currentTime;
-
-      const deltaTime = currentTime - lastTime;
-      lastTime = currentTime;
 
       const controller = controllerRef.current;
       const state = controller.getState();

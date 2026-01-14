@@ -10,7 +10,7 @@
 
 import type { ScheduledTrip } from '../types/schedule';
 import { LINE_NAME_MAP } from '../types/schedule';
-import { parseTime, normalizeOvernightTimes } from './timeUtils';
+import { normalizeOvernightTimes } from './timeUtils';
 import { mapStationName } from './stationMapping';
 
 /**

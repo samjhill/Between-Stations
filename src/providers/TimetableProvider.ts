@@ -80,7 +80,7 @@ function findCurrentSegment(
   // Find consecutive stops where current time is between them
   for (let i = 0; i < trip.stops.length - 1; i++) {
     const fromStop = trip.stops[i];
-    let toStop = trip.stops[i + 1];
+    const toStop = trip.stops[i + 1];
     
     // Handle overnight: if toStop time is less than fromStop, it's next day
     let toStopTime = toStop.arrival_time;
@@ -127,7 +127,17 @@ function findCurrentSegment(
 /**
  * Calculate position for an active trip
  */
-function calculateTripPosition(trip: ScheduledTrip, segment: { fromStop: ScheduledStop; toStop: ScheduledStop; progress: number }): { position?: { lat: number; lng: number }; routePosition?: any } | null {
+type RoutePosition = {
+  line: string;
+  fromStation: string;
+  toStation: string;
+  progress: number;
+};
+
+function calculateTripPosition(
+  trip: ScheduledTrip,
+  segment: { fromStop: ScheduledStop; toStop: ScheduledStop; progress: number }
+): { position: { lat: number; lng: number }; routePosition: RoutePosition } | null {
   // Get station coordinates
   const fromMapped = mapStationName(segment.fromStop.station_name, trip.line_id);
   const toMapped = mapStationName(segment.toStop.station_name, trip.line_id);

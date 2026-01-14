@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { Marker, Popup, useMap } from 'react-leaflet';
+import { useEffect, useRef, useMemo } from 'react';
+import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { Train } from '../types/domain';
 import { getLineColor } from '../config/lineColors';
@@ -9,8 +9,6 @@ interface TrainMarkerProps {
   train: Train;
   isSelected: boolean;
   onTrainClick: (train: Train) => void;
-  onFollowTrain: (trainId: string | null) => void;
-  followState: { trainId: string | null; enabled: boolean };
 }
 
 /**
@@ -106,11 +104,8 @@ export default function TrainMarker({
   train,
   isSelected,
   onTrainClick,
-  onFollowTrain,
-  followState,
 }: TrainMarkerProps) {
   const rawPosition = train.locationHypothesis?.position;
-  const confidence = train.locationHypothesis?.confidence || 'unknown';
   const markerRef = useRef<L.Marker | null>(null);
   const map = useMap();
   const mapViewRef = useRef({ center: map.getCenter(), zoom: map.getZoom() });
@@ -152,7 +147,7 @@ export default function TrainMarker({
       console.warn(`Failed to snap train ${train.id} to line ${train.line}:`, error);
       return rawPosition; // Fallback to raw position
     }
-  }, [rawPosition?.lat, rawPosition?.lng, train.line, train.id, map]);
+  }, [rawPosition, train.line, train.id, map]);
 
   // Calculate direction angle for the train
   const directionAngle = useMemo(() => {
@@ -164,41 +159,16 @@ export default function TrainMarker({
       console.warn(`Failed to calculate direction angle for train ${train.id}:`, error);
       return null;
     }
-  }, [snappedPosition?.lat, snappedPosition?.lng, train.line, train.direction, train.id, map]);
-
-  // Track if popup should stay open
-  const popupShouldStayOpen = useRef(false);
-
-  // Update marker position when it changes (without remounting)
-  // Preserve popup state during position updates
-  useEffect(() => {
-    if (markerRef.current && snappedPosition) {
-      const marker = markerRef.current;
-      const wasPopupOpen = marker.isPopupOpen();
-      popupShouldStayOpen.current = wasPopupOpen;
-      
-      marker.setLatLng([snappedPosition.lat, snappedPosition.lng]);
-      
-      // Reopen popup if it was open before the position update
-      if (wasPopupOpen) {
-        // Use a small timeout to ensure the position update has completed
-        requestAnimationFrame(() => {
-          if (markerRef.current && popupShouldStayOpen.current) {
-            markerRef.current.openPopup();
-          }
-        });
-      }
-    }
-  }, [snappedPosition?.lat, snappedPosition?.lng]);
-
-  if (!snappedPosition) {
-    return null;
-  }
+  }, [snappedPosition, train.line, train.direction, train.id, map]);
 
   // Memoize icon creation to avoid recreating on every render
   const icon = useMemo(() => {
     return createTrainIcon(train, isSelected, directionAngle);
-  }, [train.line, train.locationHypothesis?.confidence, isSelected, directionAngle]);
+  }, [train, isSelected, directionAngle]);
+
+  if (!snappedPosition) {
+    return null;
+  }
 
   return (
     <Marker
@@ -209,66 +179,12 @@ export default function TrainMarker({
         markerRef.current = ref;
       }}
       eventHandlers={{
-        click: (e) => {
-          const marker = e.target;
-          // Mark that popup should stay open
-          popupShouldStayOpen.current = true;
-          // Popup should open automatically via react-leaflet, but ensure it does
-          requestAnimationFrame(() => {
-            if (marker && !marker.isPopupOpen()) {
-              marker.openPopup();
-            }
-          });
+        click: () => {
           onTrainClick(train);
         },
       }}
     >
-      <Popup>
-        <div style={{ minWidth: '200px' }}>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: '1rem' }}>
-            {train.trainNumber || train.id}
-          </h3>
-          <p style={{ margin: '4px 0', fontSize: '0.9rem' }}>
-            <strong>Line:</strong> {train.line}
-          </p>
-          <p style={{ margin: '4px 0', fontSize: '0.9rem' }}>
-            <strong>Direction:</strong> {train.direction}
-          </p>
-          {train.destination && train.destination !== 'unknown' && (
-            <p style={{ margin: '4px 0', fontSize: '0.9rem' }}>
-              <strong>To:</strong> {train.destination}
-            </p>
-          )}
-          {train.delaySeconds !== undefined && train.delaySeconds > 0 && (
-            <p style={{ margin: '4px 0', color: '#dc3545', fontSize: '0.9rem' }}>
-              <strong>Delay:</strong> {Math.floor(train.delaySeconds / 60)} min{' '}
-              {train.delaySeconds % 60} sec
-            </p>
-          )}
-          <p style={{ margin: '4px 0', fontSize: '0.85rem', color: '#666' }}>
-            <strong>Confidence:</strong> {confidence}
-          </p>
-          <p style={{ margin: '4px 0', fontSize: '0.85rem', color: '#666' }}>
-            <strong>Next Stop:</strong> {train.nextStop || 'Unknown'}
-          </p>
-          <div style={{ marginTop: '8px' }}>
-            <button
-              onClick={() => onFollowTrain(train.id)}
-              style={{
-                padding: '4px 8px',
-                fontSize: '0.85rem',
-                backgroundColor: followState.trainId === train.id ? '#007bff' : '#f0f0f0',
-                color: followState.trainId === train.id ? 'white' : 'black',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
-            >
-              {followState.trainId === train.id ? 'Following' : 'Follow'}
-            </button>
-          </div>
-        </div>
-      </Popup>
+      {/* Intentionally no Leaflet Popup: click selection is handled by the app-level tooltip/sidebar */}
     </Marker>
   );
 }

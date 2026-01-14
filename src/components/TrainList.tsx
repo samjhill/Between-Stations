@@ -1,5 +1,5 @@
 import './TrainList.css';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import type { Train } from '../types/domain';
 import type { FollowState } from '../types/ui';
 
