@@ -232,7 +232,14 @@ export function getTrainDirectionAngle(
   // Determine which direction along the segment the train is heading
   let isHeadingTowardsEnd: boolean;
   
-  if (trainDirection.includes('NY') || trainDirection.includes('TO NY') || trainDirection.includes('INBOUND')) {
+  const dir = (trainDirection || '').toUpperCase();
+  if (
+    dir.includes('NY') ||
+    dir.includes('TO NY') ||
+    dir.includes('INBOUND') ||
+    dir.includes('EASTBOUND') ||
+    dir === 'EAST'
+  ) {
     // Heading towards NY (first station)
     isHeadingTowardsEnd = distToFirstFromEnd < distToFirstFromStart;
   } else {

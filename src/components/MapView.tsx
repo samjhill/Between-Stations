@@ -3,6 +3,7 @@ import { MapContainer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { ProviderManager } from '../core/Provider';
 import { TimetableProvider } from '../providers/TimetableProvider';
+import { NjtRailDataProvider } from '../providers/NjtRailDataProvider';
 import { mergeObservations } from '../core/inference';
 import type { Train } from '../types/domain';
 import type { FilterState, FollowState } from '../types/ui';
@@ -41,6 +42,11 @@ export default function MapView() {
     // Register timetable provider (schedule-based position extrapolation)
     const timetableProvider = new TimetableProvider();
     manager.register(timetableProvider);
+
+    // Register realtime provider (via backend proxy). If backend isn't running, this provider will
+    // mark itself unavailable and the app will fall back to the timetable provider.
+    const realtimeProvider = new NjtRailDataProvider();
+    manager.register(realtimeProvider);
     return manager;
   });
 
@@ -60,7 +66,7 @@ export default function MapView() {
     fetchTrains();
     
     const providers = providerManager.getProviders();
-    const minInterval = Math.min(...providers.map(p => p.updateInterval));
+    const minInterval = providers.length > 0 ? Math.min(...providers.map(p => p.updateInterval)) : 15000;
     
     const interval = setInterval(() => {
       fetchTrains();
