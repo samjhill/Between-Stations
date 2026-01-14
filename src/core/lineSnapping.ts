@@ -87,6 +87,24 @@ function closestPointOnPolyline(
 }
 
 /**
+ * Snap a lat/lng to a precomputed geometry polyline (already corridor-offset).
+ * Returns the snapped point and segment details for downstream direction/bearing.
+ */
+export function snapToGeometry(
+  rawPosition: { lat: number; lng: number },
+  geometry: [number, number][]
+): { lat: number; lng: number; segmentIndex: number; t: number } {
+  const point: [number, number] = [rawPosition.lat, rawPosition.lng];
+  const snapped = closestPointOnPolyline(point, geometry);
+  return {
+    lat: snapped.point[0],
+    lng: snapped.point[1],
+    segmentIndex: snapped.segmentIndex,
+    t: snapped.t,
+  };
+}
+
+/**
  * Get line geometry with corridor offsets applied
  * Uses official route coordinates from trainRoutes.ts
  */
@@ -183,6 +201,56 @@ export function snapTrainToLine(
   const snapped = closestPointOnPolyline(point, lineGeometry);
 
   return { lat: snapped.point[0], lng: snapped.point[1] };
+}
+
+/**
+ * Compute a direction/bearing angle (0-360 deg) from a precomputed corridor-offset geometry.
+ * Uses the same NJT direction heuristics as `getTrainDirectionAngle`.
+ */
+export function getDirectionAngleFromGeometry(
+  lineName: string,
+  position: { lat: number; lng: number },
+  trainDirection: string,
+  geometry: [number, number][]
+): number | null {
+  if (!geometry || geometry.length < 2) return null;
+
+  const point: [number, number] = [position.lat, position.lng];
+  const result = closestPointOnPolyline(point, geometry);
+
+  const segmentIndex = result.segmentIndex;
+  const segmentStart = geometry[segmentIndex];
+  const segmentEnd = geometry[segmentIndex + 1];
+  if (!segmentStart || !segmentEnd) return null;
+
+  const route = getRouteCoordinates(lineName);
+  if (route.length === 0) return null;
+
+  const firstStation = route[0];
+  const lastStation = route[route.length - 1];
+
+  const distToFirstFromStart = distance(firstStation, segmentStart);
+  const distToLastFromStart = distance(lastStation, segmentStart);
+  const distToFirstFromEnd = distance(firstStation, segmentEnd);
+  const distToLastFromEnd = distance(lastStation, segmentEnd);
+
+  let isHeadingTowardsEnd: boolean;
+  const dir = (trainDirection || '').toUpperCase();
+  if (
+    dir.includes('NY') ||
+    dir.includes('TO NY') ||
+    dir.includes('INBOUND') ||
+    dir.includes('EASTBOUND') ||
+    dir === 'EAST'
+  ) {
+    isHeadingTowardsEnd = distToFirstFromEnd < distToFirstFromStart;
+  } else {
+    isHeadingTowardsEnd = distToLastFromEnd < distToLastFromStart;
+  }
+
+  return isHeadingTowardsEnd
+    ? calculateBearing(segmentStart, segmentEnd)
+    : calculateBearing(segmentEnd, segmentStart);
 }
 
 /**

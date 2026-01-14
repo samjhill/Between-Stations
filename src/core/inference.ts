@@ -244,7 +244,8 @@ export function createLocationHypothesis(
   );
 
   return {
-    id: `hyp-${trainId}-${currentTime}`,
+    // Stable across renders when the most-recent evidence timestamp is unchanged.
+    id: `hyp-${trainId}-${sortedEvidence[0].timestamp}`,
     trainId,
     position,
     routePosition,
@@ -335,7 +336,8 @@ export function mergeObservations(
       delaySeconds: data.delaySeconds as number | undefined,
       nextStop: data.nextStop as string | undefined,
       locationHypothesis,
-      lastUpdateTime: currentTime,
+      // Prefer the evidence timestamp so this field doesn't churn on every polling cycle.
+      lastUpdateTime: locationHypothesis.timestamp,
       state,
     });
   }

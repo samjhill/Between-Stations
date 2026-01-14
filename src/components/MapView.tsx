@@ -33,7 +33,7 @@ function getProviderMode(): ProviderMode {
 export default function MapView() {
   const providerMode = getProviderMode();
   const [trains, setTrains] = useState<Train[]>([]);
-  const [selectedTrain, setSelectedTrain] = useState<Train | null>(null);
+  const [selectedTrainId, setSelectedTrainId] = useState<string | null>(null);
   const [selectedLineId, setSelectedLineId] = useState<string | null>(null);
   const [filterState, setFilterState] = useState<FilterState>({
     lines: [],
@@ -73,7 +73,58 @@ export default function MapView() {
     try {
       const observations = await providerManager.fetchAllObservations();
       const mergedTrains = mergeObservations(observations);
-      setTrains(mergedTrains);
+      setTrains((prev) => {
+        if (prev.length === 0) return mergedTrains;
+        const prevById = new Map(prev.map((t) => [t.id, t] as const));
+
+        const samePos = (
+          a?: { lat: number; lng: number } | null,
+          b?: { lat: number; lng: number } | null
+        ) => {
+          if (!a && !b) return true;
+          if (!a || !b) return false;
+          // ~1m-ish tolerance in degrees (good enough to avoid churn from float noise).
+          const eps = 1e-5;
+          return Math.abs(a.lat - b.lat) < eps && Math.abs(a.lng - b.lng) < eps;
+        };
+
+        const equivalent = (a: Train, b: Train) => {
+          if (a.id !== b.id) return false;
+          if (a.line !== b.line) return false;
+          if (a.direction !== b.direction) return false;
+          if (a.destination !== b.destination) return false;
+          if (a.status !== b.status) return false;
+          if (a.state !== b.state) return false;
+          if (a.delaySeconds !== b.delaySeconds) return false;
+          if (a.nextStop !== b.nextStop) return false;
+
+          const aHyp = a.locationHypothesis;
+          const bHyp = b.locationHypothesis;
+          if (!!aHyp !== !!bHyp) return false;
+          if (aHyp && bHyp) {
+            if (aHyp.confidence !== bHyp.confidence) return false;
+            if (!samePos(aHyp.position || null, bHyp.position || null)) return false;
+          }
+
+          return true;
+        };
+
+        let changed = false;
+        const reconciled = mergedTrains.map((nextTrain) => {
+          const prevTrain = prevById.get(nextTrain.id);
+          if (!prevTrain) {
+            changed = true;
+            return nextTrain;
+          }
+          if (equivalent(prevTrain, nextTrain)) {
+            return prevTrain;
+          }
+          changed = true;
+          return nextTrain;
+        });
+
+        return changed ? reconciled : prev;
+      });
     } catch (error) {
       console.error('Error fetching trains:', error);
     }
@@ -81,16 +132,45 @@ export default function MapView() {
 
   // Initial fetch and set up polling
   useEffect(() => {
-    fetchTrains();
-    
-    const providers = providerManager.getProviders();
-    const minInterval = providers.length > 0 ? Math.min(...providers.map(p => p.updateInterval)) : 15000;
-    
-    const interval = setInterval(() => {
-      fetchTrains();
-    }, minInterval);
+    let cancelled = false;
+    let timer: number | null = null;
 
-    return () => clearInterval(interval);
+    const providers = providerManager.getProviders();
+    const minInterval = providers.length > 0 ? Math.min(...providers.map((p) => p.updateInterval)) : 15000;
+
+    const schedule = () => {
+      if (cancelled) return;
+
+      // Avoid doing background work when the tab isn't visible.
+      if (document.hidden) {
+        timer = window.setTimeout(schedule, minInterval);
+        return;
+      }
+
+      void fetchTrains().finally(() => {
+        if (cancelled) return;
+        timer = window.setTimeout(schedule, minInterval);
+      });
+    };
+
+    const onVisibilityChange = () => {
+      if (cancelled) return;
+      if (!document.hidden) {
+        // When coming back, refresh ASAP.
+        if (timer !== null) window.clearTimeout(timer);
+        timer = window.setTimeout(schedule, 0);
+      }
+    };
+
+    // Kick off immediately
+    timer = window.setTimeout(schedule, 0);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      cancelled = true;
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      if (timer !== null) window.clearTimeout(timer);
+    };
   }, [fetchTrains, providerManager]);
 
   // Filter trains - memoized to avoid recalculation on every render
@@ -126,7 +206,7 @@ export default function MapView() {
   // Camera controller now handles follow mode - no need for this effect
 
   const handleTrainClick = useCallback((train: Train) => {
-    setSelectedTrain(train);
+    setSelectedTrainId(train.id);
     setSelectedLineId(null);
     // Don't open sidebar - tooltip will show instead
   }, []);
@@ -134,7 +214,7 @@ export default function MapView() {
   const handleLineClick = useCallback((lineId: string, clickLatLng: { lat: number; lng: number }) => {
     void clickLatLng;
     setSelectedLineId(lineId);
-    setSelectedTrain(null);
+    setSelectedTrainId(null);
   }, []);
 
   const handleFollowTrain = useCallback((trainId: string | null) => {
@@ -172,6 +252,11 @@ export default function MapView() {
       directionCountsVisible: countDirections(visibleOnLine),
     };
   }, [selectedLineId, trains, filteredTrains]);
+
+  const selectedTrain = useMemo(() => {
+    if (!selectedTrainId) return null;
+    return trains.find((t) => t.id === selectedTrainId) || null;
+  }, [selectedTrainId, trains]);
 
   return (
     <div className="app">
@@ -267,15 +352,13 @@ export default function MapView() {
               trains={filteredTrains}
               selectedTrain={selectedTrain}
               followState={followState}
-              onTrainClick={(train) => {
-                handleTrainClick(train);
-              }}
+              onTrainClick={handleTrainClick}
               onFollowTrain={handleFollowTrain}
             />
             {sidebarOpen && selectedTrain && (
               <TrainDetails
                 train={selectedTrain}
-                onClose={() => setSelectedTrain(null)}
+                onClose={() => setSelectedTrainId(null)}
                 onFollow={() => handleFollowTrain(selectedTrain.id)}
                 isFollowing={followState.enabled && followState.trainId === selectedTrain.id}
               />
@@ -296,7 +379,7 @@ export default function MapView() {
         <TrainTooltip
           train={selectedTrain}
           position={selectedTrain.locationHypothesis.position}
-          onClose={() => setSelectedTrain(null)}
+          onClose={() => setSelectedTrainId(null)}
           onFollow={(trainId) => handleFollowTrain(trainId)}
           isFollowing={followState.enabled && followState.trainId === selectedTrain.id}
         />

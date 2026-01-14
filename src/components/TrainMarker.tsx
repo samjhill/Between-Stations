@@ -1,14 +1,24 @@
-import { useEffect, useRef, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { Train } from '../types/domain';
 import { getLineColor } from '../config/lineColors';
-import { snapTrainToLine, getTrainDirectionAngle } from '../core/lineSnapping';
+import {
+  getDirectionAngleFromGeometry,
+  snapToGeometry,
+  snapTrainToLine,
+  getTrainDirectionAngle,
+} from '../core/lineSnapping';
 
 interface TrainMarkerProps {
   train: Train;
   isSelected: boolean;
   onTrainClick: (train: Train) => void;
+  /**
+   * Precomputed (corridor-offset) polyline for this train's line at the current map view.
+   * Passing this avoids recomputing offsets inside each marker.
+   */
+  lineGeometry?: [number, number][];
 }
 
 /**
@@ -104,70 +114,45 @@ export default function TrainMarker({
   train,
   isSelected,
   onTrainClick,
+  lineGeometry,
 }: TrainMarkerProps) {
   const rawPosition = train.locationHypothesis?.position;
-  const markerRef = useRef<L.Marker | null>(null);
   const map = useMap();
-  const [mapTick, setMapTick] = useState(0);
-  const mapViewRef = useRef({ center: map.getCenter(), zoom: map.getZoom() });
-
-  // Track map view changes (needed for pixel-based offsets) - throttled
-  useEffect(() => {
-    let rafId: number | null = null;
-    const updateView = () => {
-      if (rafId === null) {
-        rafId = requestAnimationFrame(() => {
-          mapViewRef.current = { center: map.getCenter(), zoom: map.getZoom() };
-          // Force recompute of pixel-based snapping so trains stay on the stacked lines.
-          setMapTick((t) => t + 1);
-          rafId = null;
-        });
-      }
-    };
-
-    map.on('moveend', updateView);
-    map.on('zoomend', updateView);
-    map.on('viewreset', updateView);
-    map.on('resize', updateView);
-
-    return () => {
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-      map.off('moveend', updateView);
-      map.off('zoomend', updateView);
-      map.off('viewreset', updateView);
-      map.off('resize', updateView);
-    };
-  }, [map]);
 
   // Snap train position to its line (accounting for corridor offsets)
-  // Only recalculate when position or line changes, not on every map move
   const snappedPosition = useMemo(() => {
-    // Dependency used to recompute snapping on pan/zoom (corridor offset math depends on map transform).
-    void mapTick;
-
     if (!rawPosition) return null;
     
     try {
+      // Fast path: use precomputed geometry from MapContent.
+      if (lineGeometry && lineGeometry.length >= 2) {
+        const snapped = snapToGeometry(rawPosition, lineGeometry);
+        return { lat: snapped.lat, lng: snapped.lng };
+      }
+
+      // Fallback: compute geometry internally (slower).
       return snapTrainToLine(train.line, rawPosition, map);
     } catch (error) {
       console.warn(`Failed to snap train ${train.id} to line ${train.line}:`, error);
       return rawPosition; // Fallback to raw position
     }
-  }, [rawPosition, train.line, train.id, map, mapTick]);
+  }, [rawPosition, train.line, train.id, map, lineGeometry]);
 
   // Calculate direction angle for the train
   const directionAngle = useMemo(() => {
     if (!snappedPosition) return null;
     
     try {
+      if (lineGeometry && lineGeometry.length >= 2) {
+        return getDirectionAngleFromGeometry(train.line, snappedPosition, train.direction, lineGeometry);
+      }
+      // Fallback: compute geometry internally (slower).
       return getTrainDirectionAngle(train.line, snappedPosition, train.direction, map);
     } catch (error) {
       console.warn(`Failed to calculate direction angle for train ${train.id}:`, error);
       return null;
     }
-  }, [snappedPosition, train.line, train.direction, train.id, map]);
+  }, [snappedPosition, train.line, train.direction, train.id, lineGeometry, map]);
 
   // Memoize icon creation to avoid recreating on every render
   const icon = useMemo(() => {
@@ -183,9 +168,6 @@ export default function TrainMarker({
       key={train.id} // Stable key - position updates via useEffect
       position={[snappedPosition.lat, snappedPosition.lng]}
       icon={icon}
-      ref={(ref) => {
-        markerRef.current = ref;
-      }}
       eventHandlers={{
         click: () => {
           onTrainClick(train);
