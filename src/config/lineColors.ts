@@ -9,7 +9,9 @@ export const LINE_COLORS: Record<string, string> = {
   'North Jersey Coast': '#001489',      // Light Blue (Pantone Reflex Blue)
   'Morris & Essex': '#009739',          // Dark Green (Pantone 354)
   'Montclair-Boonton': '#6A5D1B',       // Light Brown (Pantone 450)
-  'Main/Bergen': '#FFCD00',             // Yellow (Pantone 116)
+  'Main Line': '#FFCD00',               // Yellow (Pantone 116)
+  'Bergen County': '#E6B800',           // Yellow variant for distinction
+  'Port Jervis': '#B38F00',             // Darker yellow-brown variant for the Port Jervis extension
   'Pascack Valley': '#A20067',          // Purple (Pantone 246)
   'Raritan Valley': '#FF671F',          // Orange (Pantone 165)
   'Atlantic City': '#002D72',           // Dark Blue (Navy blue variant for distinction)

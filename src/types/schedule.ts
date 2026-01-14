@@ -29,7 +29,9 @@ export interface ScheduledTrip {
 export const LINE_NAME_MAP: Record<string, string> = {
   'AC': 'Atlantic City',
   'MB': 'Montclair-Boonton',
-  'MC': 'Main/Bergen',
+  // Historically this was keyed as "Main/Bergen"; the UI now splits it.
+  // (Some legacy parsers may still emit MC; treat as Main Line by default.)
+  'MC': 'Main Line',
   'ME': 'Morris & Essex',
   'NEC': 'Northeast Corridor',
   'NJCL': 'North Jersey Coast',

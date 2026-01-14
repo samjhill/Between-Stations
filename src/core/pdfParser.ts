@@ -19,7 +19,9 @@ import { mapStationName } from './stationMapping';
  */
 const FILENAME_TO_LINE_MAP: Record<string, string> = {
   'atlantic-city': 'Atlantic City',
-  'main-bergen': 'Main/Bergen',
+  // This PDF includes multiple services; we treat it as Main Line by default and
+  // further classify trips into Main Line / Bergen County / Port Jervis based on stops.
+  'main-bergen': 'Main Line',
   'montclair-boonton': 'Montclair-Boonton',
   'morris-essex': 'Morris & Essex',
   'north-jersey-coastline': 'North Jersey Coast',
@@ -33,7 +35,7 @@ const FILENAME_TO_LINE_MAP: Record<string, string> = {
  * Handles formats like:
  * - "atlantic-city.pdf" → "Atlantic City"
  * - "atlantic-city-weekend.pdf" → "Atlantic City"
- * - "main-bergen.pdf" → "Main/Bergen"
+ * - "main-bergen.pdf" → "Main Line" (then split to Main Line / Bergen County / Port Jervis)
  */
 function extractLineNameFromFilename(filename: string): string {
   // Remove .pdf extension
@@ -176,14 +178,26 @@ function detectLineIdFromStations(
 
   // Montclair-Boonton: trips that include Boonton (terminal station)
   // Only if coming from MB PDF (to avoid misclassification from other PDFs)
-  if (baseLineId === 'Montclair-Boonton' || baseLineId === 'Main/Bergen') {
+  if (baseLineId === 'Montclair-Boonton' || baseLineId === 'Main Line') {
     if (stationIds.has('BON') || stationNames.some(name => name.includes('boonton'))) {
       return 'Montclair-Boonton';
     }
-    // If from Main/Bergen PDF but doesn't have Boonton, keep as Main/Bergen
-    if (baseLineId === 'Main/Bergen') {
-      return 'Main/Bergen';
+  }
+
+  // Split Main Line / Bergen County / Port Jervis from the combined main-bergen PDF.
+  if (baseLineId === 'Main Line') {
+    // Port Jervis: identify by western NY terminals.
+    if (stationIds.has('POJ') || stationNames.some((n) => n.includes('port jervis'))) {
+      return 'Port Jervis';
     }
+
+    // Bergen County: identify by Bergen-only infill stations.
+    if (stationIds.has('WES') || stationNames.some((n) => n.includes('wesmont'))) return 'Bergen County';
+    if (stationIds.has('PLA') || stationNames.some((n) => n.includes('plauderville'))) return 'Bergen County';
+    if (stationIds.has('RAD') || stationNames.some((n) => n.includes('radburn'))) return 'Bergen County';
+    if (stationIds.has('RUT') || stationNames.some((n) => n.includes('rutherford'))) return 'Bergen County';
+
+    return 'Main Line';
   }
 
   // Morristown Line: trips that include Morristown (and not Gladstone, which we already checked)

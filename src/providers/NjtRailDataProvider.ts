@@ -46,7 +46,9 @@ function normalizeNjtDirection(direction?: string): string {
 function mapNjtLineName(njtLine: string): string {
   const n = (njtLine || '').trim().toLowerCase();
 
-  if (n === 'main line' || n === 'bergen county line') return 'Main/Bergen';
+  if (n === 'main line') return 'Main Line';
+  if (n === 'bergen county line') return 'Bergen County';
+  if (n === 'port jervis line') return 'Port Jervis';
   if (n === 'morris & essex line' || n === 'me line') return 'Morris & Essex';
   if (n === 'montclair-boonton line') return 'Montclair-Boonton';
   if (n === 'north jersey coast line') return 'North Jersey Coast';
