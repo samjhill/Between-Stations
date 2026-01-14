@@ -1,8 +1,8 @@
 /* Modern, minimal train details */
 
 .train-details {
-  background: white;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
   max-height: 50vh;
   display: flex;
   flex-direction: column;
@@ -14,15 +14,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.25rem;
-  background: rgba(248, 249, 250, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border-2);
 }
 
 .train-details-header h2 {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #2C3E50;
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -37,14 +37,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
+  color: var(--muted);
   border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .close-button:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: #2C3E50;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
 }
 
 .train-details-content {
@@ -65,10 +65,10 @@
   margin: 0 0 0.875rem 0;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2C3E50;
+  color: var(--text-2);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 0.5rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -78,7 +78,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.625rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid var(--border-2);
 }
 
 .detail-row:last-child {
@@ -87,13 +87,13 @@
 
 .detail-label {
   font-weight: 500;
-  color: #666;
+  color: var(--muted);
   font-size: 0.8125rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .detail-value {
-  color: #2C3E50;
+  color: var(--text);
   text-align: right;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -131,10 +131,10 @@
 
 .detail-description {
   padding: 0.75rem;
-  background: rgba(248, 249, 250, 0.8);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 8px;
   font-size: 0.8125rem;
-  color: #555;
+  color: var(--text-2);
   margin-top: 0.75rem;
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -142,25 +142,25 @@
 
 .detail-explanation {
   padding: 0.875rem;
-  background: rgba(44, 62, 80, 0.04);
-  border-left: 3px solid #2C3E50;
+  background: rgba(96, 165, 250, 0.10);
+  border-left: 3px solid var(--accent);
   border-radius: 8px;
   font-size: 0.8125rem;
-  color: #555;
+  color: var(--text-2);
   margin-top: 0.875rem;
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .detail-explanation strong {
-  color: #2C3E50;
+  color: var(--text);
   font-weight: 600;
 }
 
 .train-details-actions {
   margin-top: 1.25rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--border);
 }
 
 .follow-button {
@@ -169,26 +169,26 @@
   font-size: 0.875rem;
   font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  color: #666;
+  color: var(--muted);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .follow-button:hover {
-  background: rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.15);
-  color: #2C3E50;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text);
 }
 
 .follow-button.active {
-  background: #2C3E50;
-  color: white;
-  border-color: #2C3E50;
+  background: var(--accent);
+  color: #0b0f14;
+  border-color: var(--accent);
 }
 
 .follow-button.active:hover {
-  background: #1a252f;
+  background: var(--accent-2);
 }

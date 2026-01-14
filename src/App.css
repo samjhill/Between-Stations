@@ -6,7 +6,7 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: #F5F5F5;
+  background: var(--bg);
   position: relative;
 }
 
@@ -18,11 +18,11 @@
   right: 0;
   z-index: 1000;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--border-2);
+  box-shadow: var(--shadow-sm);
 }
 
 .app-header-content {
@@ -42,7 +42,7 @@
   font-weight: 600;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #2C3E50;
+  color: var(--text);
   letter-spacing: -0.01em;
 }
 
@@ -55,7 +55,7 @@
 .app-header-nav-link {
   font-size: 0.9375rem;
   font-weight: 500;
-  color: #2C3E50;
+  color: var(--text-2);
   text-decoration: none;
   padding: 0.375rem 0.75rem;
   border-radius: 6px;
@@ -63,8 +63,8 @@
 }
 
 .app-header-nav-link:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: #2C3E50;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
 }
 
 .app-header-actions-overlay {
@@ -87,23 +87,23 @@
   height: 32px;
   padding: 0;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
   border-radius: 6px;
   cursor: pointer;
-  color: #666;
+  color: var(--muted);
   transition: all 0.2s ease;
 }
 
 .icon-button:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: #2C3E50;
-  border-color: rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 .icon-button.active {
-  background: #2C3E50;
-  color: white;
-  border-color: #2C3E50;
+  background: var(--accent);
+  color: #0b0f14;
+  border-color: var(--accent);
 }
 
 .icon-button svg {
@@ -119,10 +119,10 @@
   z-index: 999;
   width: 320px;
   max-height: calc(100vh - 80px);
-  background: white;
+  background: var(--surface);
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
   overflow: hidden;
   animation: slideIn 0.2s ease-out;
 }
@@ -148,12 +148,12 @@
 .app-map {
   flex: 1;
   position: relative;
-  background: #F5F5F5;
+  background: var(--map-bg);
 }
 
 /* MiniMetro-style map background */
 .app-map .leaflet-container {
-  background: #F5F5F5;
+  background: var(--map-bg);
 }
 
 .app-map .leaflet-tile-container {
@@ -187,9 +187,9 @@
   bottom: 0;
   width: 380px;
   max-width: 90vw;
-  background: white;
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.08);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.40);
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 998;
@@ -207,15 +207,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.25rem;
-  background: rgba(248, 249, 250, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--surface-glass-2);
+  border-bottom: 1px solid var(--border-2);
 }
 
 .sidebar-header h2 {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #2C3E50;
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -238,38 +238,38 @@
   left: 1rem;
   z-index: 996;
   padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #2C3E50;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-2);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   pointer-events: none;
 }
 
 /* Leaflet controls styling */
 .leaflet-control {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 8px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: var(--surface-glass) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .leaflet-control-zoom a {
-  background-color: white !important;
-  color: #2C3E50 !important;
+  background-color: transparent !important;
+  color: var(--text) !important;
   border: none !important;
   border-radius: 0 !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
 }
 
 .leaflet-control-zoom a:first-child {
@@ -280,7 +280,7 @@
 .leaflet-control-zoom a:last-child {
   border-bottom-left-radius: 8px !important;
   border-bottom-right-radius: 8px !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-top: 1px solid var(--border) !important;
 }
 
 /* Station label styling - MiniMetro-style minimal typography */
@@ -298,8 +298,8 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   font-size: 11px;
   font-weight: 400;
-  color: #2C3E50;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  color: var(--map-label);
+  text-shadow: var(--map-label-shadow);
 }
 
 /* Train marker hover effect */
@@ -339,13 +339,13 @@
 
 .sidebar-content::-webkit-scrollbar-thumb,
 .filters-content::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 3px;
 }
 
 .sidebar-content::-webkit-scrollbar-thumb:hover,
 .filters-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.22);
 }
 
 /* Footer */
@@ -356,11 +356,11 @@
   right: 0;
   z-index: 997;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+  border-top: 1px solid var(--border-2);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -368,13 +368,13 @@
 
 .app-footer-link {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--muted);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .app-footer-link:hover {
-  color: #2C3E50;
+  color: var(--text);
 }
 
 /* Responsive */

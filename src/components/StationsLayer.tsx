@@ -72,7 +72,7 @@ function StationsLayer() {
               pathOptions={{
                 fillColor: 'transparent',
                 fillOpacity: 0,
-                color: '#2C3E50',
+                color: 'var(--map-stroke)',
                 weight: 2.5,
                 opacity: 0.5,
                 dashArray: '4, 4',
@@ -88,7 +88,7 @@ function StationsLayer() {
               pathOptions={{
                 fillColor: 'transparent',
                 fillOpacity: 0,
-                color: '#2C3E50',
+                color: 'var(--map-stroke)',
                 weight: 2,
                 opacity: 0.7,
                 dashArray: '3, 3',
@@ -106,7 +106,7 @@ function StationsLayer() {
             pathOptions={{
               fillColor: station.isMajor ? '#FFFFFF' : '#FFFFFF',
               fillOpacity: 1,
-              color: '#2C3E50',
+              color: 'var(--map-stroke)',
               weight: station.isMajor ? 3.5 : 1.5,
               opacity: 1,
             }}
@@ -124,11 +124,11 @@ function StationsLayer() {
                     fontSize: station.isMajor ? '12px' : '10px',
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                     fontWeight: station.isMajor ? '700' : '400',
-                    color: '#2C3E50',
+                    color: 'var(--map-label)',
                     whiteSpace: 'nowrap',
                     textShadow: station.isMajor 
-                      ? '0 1px 3px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.8)' 
-                      : '0 1px 2px rgba(255, 255, 255, 0.8)',
+                      ? '0 1px 3px rgba(0, 0, 0, 0.85), 0 0 2px rgba(0, 0, 0, 0.75)' 
+                      : '0 1px 2px rgba(0, 0, 0, 0.75)',
                   }}
                 >
                   {station.name}
