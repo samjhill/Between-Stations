@@ -10,6 +10,7 @@
 import { BaseProvider } from '../core/Provider';
 import type { ProviderObservation, ProviderTrainData } from '../types/domain';
 import { mapStationName } from '../core/stationMapping';
+import { parseTime } from '../core/timeUtils';
 
 type BackendVehicleRow = {
   ID: string;
@@ -73,6 +74,24 @@ function parseDelaySeconds(v?: string): number | undefined {
   return Math.max(0, Math.round(n));
 }
 
+function parseScheduledDepartureTime(v?: string): { seconds?: number; timestampMs?: number } {
+  if (!v) return {};
+  const raw = String(v).trim();
+  if (!raw) return {};
+
+  // Some upstreams may send a full datetime string. If so, keep a timestamp.
+  const dateParsed = Date.parse(raw);
+  if (Number.isFinite(dateParsed)) {
+    return { timestampMs: dateParsed };
+  }
+
+  // Otherwise, attempt to parse as a local time like "8:17 AM"
+  const seconds = parseTime(raw);
+  if (typeof seconds === 'number') return { seconds };
+
+  return {};
+}
+
 function normalizeNextStop(v?: string): string | undefined {
   if (!v) return undefined;
   const raw = v.trim();
@@ -123,6 +142,8 @@ export class NjtRailDataProvider extends BaseProvider {
           const hasCoords =
             lat != null && lng != null && isPlausibleLatLng(lat, lng);
 
+          const sched = parseScheduledDepartureTime(row.SCHED_DEP_TIME);
+
           return {
             trainNumber: row.ID,
             line: mapNjtLineName(row.TRAIN_LINE),
@@ -133,7 +154,12 @@ export class NjtRailDataProvider extends BaseProvider {
             position: hasCoords ? { lat: lat!, lng: lng! } : undefined,
             nextStop: normalizeNextStop(row.NEXT_STOP),
             delaySeconds: parseDelaySeconds(row.SEC_LATE),
-            rawData: row,
+            rawData: {
+              ...row,
+              // Normalized schedule time for UI (e.g., next-stop expected time display)
+              nextStopScheduledTimeSeconds: sched.seconds,
+              nextStopScheduledTimestampMs: sched.timestampMs,
+            },
           };
         })
         .filter((t) => t.position); // only include trains that have coordinates

@@ -1,5 +1,6 @@
 import './TrainDetails.css';
 import type { Train } from '../types/domain';
+import { getNextStopTiming } from '../core/nextStopTiming';
 
 interface TrainDetailsProps {
   train: Train;
@@ -59,6 +60,7 @@ export default function TrainDetails({
   const explanation = train.locationHypothesis?.explanation || 'No explanation available';
   const position = train.locationHypothesis?.position;
   const routePosition = train.locationHypothesis?.routePosition;
+  const nextStopTiming = getNextStopTiming(train);
 
   return (
     <div className="train-details">
@@ -104,6 +106,16 @@ export default function TrainDetails({
             <span className="detail-label">Next Stop:</span>
             <span className="detail-value">{train.nextStop || 'Unknown'}</span>
           </div>
+          {nextStopTiming && (
+            <div className="detail-row">
+              <span className="detail-label">Next Stop Time:</span>
+              <span className="detail-value">
+                {nextStopTiming.expectedLabel}
+                {nextStopTiming.etaLabel ? ` (${nextStopTiming.etaLabel})` : ''}
+                {train.delaySeconds && train.delaySeconds > 0 ? ` · sched ${nextStopTiming.scheduledLabel}` : ''}
+              </span>
+            </div>
+          )}
           <div className="detail-row">
             <span className="detail-label">State:</span>
             <span className="detail-value">{train.state.replace('_', ' ')}</span>

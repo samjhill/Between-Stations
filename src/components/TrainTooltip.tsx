@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { Train } from '../types/domain';
 import './TrainTooltip.css';
+import { getNextStopTiming } from '../core/nextStopTiming';
 
 interface TrainTooltipProps {
   train: Train | null;
@@ -56,6 +57,7 @@ export default function TrainTooltip({
 
   const confidence = train.locationHypothesis?.confidence || 'unknown';
   const routePosition = train.locationHypothesis?.routePosition;
+  const nextStopTiming = getNextStopTiming(train);
 
   return (
     <div className="train-tooltip-overlay" onClick={onClose}>
@@ -91,6 +93,17 @@ export default function TrainTooltip({
             <span className="train-tooltip-label">Next Stop:</span>
             <span className="train-tooltip-value">{train.nextStop || 'Unknown'}</span>
           </div>
+
+          {nextStopTiming && (
+            <div className="train-tooltip-row">
+              <span className="train-tooltip-label">Next Stop Time:</span>
+              <span className="train-tooltip-value">
+                {nextStopTiming.expectedLabel}
+                {nextStopTiming.etaLabel ? ` (${nextStopTiming.etaLabel})` : ''}
+                {train.delaySeconds && train.delaySeconds > 0 ? ` · sched ${nextStopTiming.scheduledLabel}` : ''}
+              </span>
+            </div>
+          )}
           
           {routePosition && (
             <div className="train-tooltip-row">
